@@ -349,12 +349,19 @@ class EbeneHess:
                 normal0[2] /= normal0Length
                 self._normal0 = normal0
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f592eb12fc6f730f78182306e8202270700fda47
                 if(type(d)==float or type(d)==int):
                     if(d>=0):
                         self._d = d
                     else:
+<<<<<<< HEAD
                         raise ArithmeticError("d needs to be greater than/equal to 0.")
+=======
+                        raise ArithmeticError("d needs to be greater than or equal 0.")
+>>>>>>> f592eb12fc6f730f78182306e8202270700fda47
                 else:
                     raise TypeError("d needs to be a real number! d was of type '{}'.".format(type(d).__name__))
             else:
@@ -397,7 +404,7 @@ class EbeneHess:
             raise TypeError("normal0 needs to be a list! normal0 was of type '{}'.".format(type(normal0).__name__))
             
     def __repr__(self):
-        return "EbenesHess({}, {})".format(self._d, self._normal0)
+        return "EbeneHess({}, {})".format(self._d, self._normal0)
     
     def fromNormalToParametric(self):
         n0 = self.getNormal0()
