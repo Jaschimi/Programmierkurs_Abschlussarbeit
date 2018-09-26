@@ -339,7 +339,7 @@ class EbeneHess:
                         raise TypeError("The entries of normal0 need to be real numbers! normal0[0] was of type '" +
                         "{}', normal0[1] was of type '{}', ".format(type(normal0[0]).__name__, type(normal0[1]).__name__) +
                         "and normal0[2] was of type '{}'.".format(type(normal0[2]).__name__))
-                normal0Length = (normal0[0]**2+normal0[1]**2+normal0[2]**2)**0,5
+                normal0Length = (normal0[0]**2 + normal0[1]**2 + normal0[2]**2)**0.5
                 normal0[0] /= normal0Length
                 normal0[1] /= normal0Length
                 normal0[2] /= normal0Length
@@ -376,7 +376,7 @@ class EbeneHess:
                         raise TypeError("The entries of normal0 need to be real numbers! normal0[0] was of type '" +
                         "{}', normal0[1] was of type '{}', ".format(type(normal0[0]).__name__, type(normal0[1]).__name__) +
                         "and normal0[2] was of type '{}'.".format(type(normal0[2]).__name__))
-                normal0Length = (normal0[0]**2+normal0[1]**2+normal0[2]**2)**0,5
+                normal0Length = (normal0[0]**2 + normal0[1]**2 + normal0[2]**2)**0.5
                 normal0[0] /= normal0Length
                 normal0[1] /= normal0Length
                 normal0[2] /= normal0Length
@@ -389,9 +389,19 @@ class EbeneHess:
     
     def fromNormalToParametric(self):
         n0 = self.getNormal0()
-
-        #der Stützvektor fehlt bei der Initialisierung!
+        #der Stützvektor fehlt!
+        #es ist d = stützvektor*normalenvektor >=0
+            #suche einen von 0 verschiedenen eintrag im Normalenvektor, z.b. der 0te
+            #setze den ersten und zweiten eintrag des stützvektors auf 0
+            #setze den 0ten eintrag auf d/n0[0]
+        
         stützvektor = [0,0,0]
+        for i in range(3):
+            if(n0[i]!=float(0) or n0[i]!=int(0)):
+                stützvektor[i] =d/n0[i]
+            break
+                
+        
         richtungsvektor1 = [ 0, -n0[2] , n0[1] ]
         richtungsvektor2 = [ n0[1] , -n0[0] , 0 ]
         parametricPlane = Ebene(stützvektor, richtungsvektor1, richtungsvektor2)
