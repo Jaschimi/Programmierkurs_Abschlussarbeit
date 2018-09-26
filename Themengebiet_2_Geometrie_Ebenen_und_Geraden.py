@@ -390,6 +390,28 @@ class EbeneHess:
             
     def __repr__(self):
         return "EbenesHess({}, {})".format(self._d, self._normal0)
+    
+    def fromNormalToParametric(self):
+        n0 = self.getNormal0()
+        #der Stützvektor fehlt!
+        #es ist d = stützvektor*normalenvektor >=0
+            #suche einen von 0 verschiedenen eintrag im Normalenvektor, z.b. der 0te
+            #setze den ersten und zweiten eintrag des stützvektors auf 0
+            #setze den 0ten eintrag auf d/n0[0]
+        
+        stützvektor = [0,0,0]
+        for i in range(3):
+            if(n0[i]!=float(0) or n0[i]!=int(0)):
+                stützvektor[i] =d/n0[i]
+            break
+                
+        
+        richtungsvektor1 = [ 0, -n0[2] , n0[1] ]
+        richtungsvektor2 = [ n0[1] , -n0[0] , 0 ]
+        parametricPlane = Ebene(stützvektor, richtungsvektor1, richtungsvektor2)
+        return parametricPlane
+
+                
 
 testEbene = Ebene([1, -6662, 3], [1000, -2.3, 3], [-1, 0, 3])
 testGerade = Gerade([-200, 662, 3], [-991, 2, 33])
