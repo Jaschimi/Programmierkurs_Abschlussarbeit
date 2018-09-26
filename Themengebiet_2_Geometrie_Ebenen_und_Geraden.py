@@ -437,7 +437,7 @@ class EbeneHess:
     def __repr__(self):
         return "EbeneHess({}, {})".format(self._d, self._normal0)
     
-    def fromNormalToParametric(self):
+    def hess_to_para(self):
         n0 = self.getNormal0()
         d = self.getD()
         #es ist d = stützvektor*normalenvektor >=0
