@@ -46,8 +46,8 @@ class Ebene:
                 self._vector2 = vector2
             else:
                 raise IndexError("x0, vector1, and vector2 need to be of length 3! x0 was of length '" +
-            "{}', vector1 was of length '{}', ".format(len(x0), len(vector1)) +
-            "and vector2 was of length '{}'.".format(len(vector2)))
+            "{}', vector1 was of type '{}', ".format(len(x0), len(vector1)) +
+            "and vector2 was of type '{}'.".format(len(vector2)))
 
         else:
             raise TypeError("x0, vector1, and vector2 need to be lists! x0 was of type '" +
@@ -126,12 +126,11 @@ class Ebene:
             
           
     def getnormal(self):
-        #pseudocode
-            #getvector1
-            #getvector2
-            #_vectorpr = kreuzprodukt
-            #return _vectorpr
-
+        v1 = self.getVector1
+        v2 = self.getVector2      
+        vecpr =[ v1[1]*v2[2]-v[2]*v2[1], v1[2]*v2[0]-v[0]*v2[2], v1[0]*v2[1]-v[1]*v2[0] ]
+        return vecpr           
+        
     def __str__(self):
         #Easy access for the length of the entries in x0
         lengthOfX00 = len(str(self._x0[0]))
