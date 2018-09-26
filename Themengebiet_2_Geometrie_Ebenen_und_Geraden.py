@@ -129,13 +129,28 @@ class Ebene:
         v1 = self.getVector1()
         v2 = self.getVector2()      
         vecpr =[ v1[1]*v2[2]-v1[2]*v2[1], v1[2]*v2[0]-v1[0]*v2[2], v1[0]*v2[1]-v1[1]*v2[0] ]
-        #Die Normierung ist für die Methode getnormal_0(self): gedacht
-        #vecprLength = (vecpr[0]**2+vecpr[1]**2+vecpr[2]**2)**0,5
-        #vecpr[0] /= vecprLength
-        #vecpr[1] /= vecprLength
-        #vecpr[2] /= vecprLength
         return vecpr
-    
+
+    def getnormal0(self):
+        vecpr = self.getnormal()
+        vecprLength = (vecpr[0]**2+vecpr[1]**2+vecpr[2]**2)**0,5
+        vecpr[0] /= vecprLength
+        vecpr[1] /= vecprLength
+        vecpr[2] /= vecprLength
+        for i in range(3):
+            p0 = 0
+            p0 += self._x0[i]*vecpr[i]
+        if p0 < 0:
+            for i in range(3):
+                vecpr[i] = vecpr[i]*(-1)
+        return vecpr
+
+    def para_to_hess(self):
+        hesseform = EbeneHess([0,0,0],[0,0,0])
+        hesseform._normal0 = self.getnormal0()
+        hesseform._d = self._x0*hesseform._normal0
+        return(str(hesseform))
+
     def __str__(self):
         print()
         #Easy access for the length of the entries in x0
@@ -279,7 +294,7 @@ class Gerade:
                 raise IndexError("vector1 needs to be of length 3! vector1 was of length '{}'.".format(len(vector1)))
         else:
             raise TypeError("vector1 needs to be a list! vector1 was of type '{}'.".format(type(vector1).__name__))
-
+        
     def __str__(self):
         print()
         #Easy access for the length of the entries in x0
