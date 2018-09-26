@@ -128,7 +128,7 @@ class Ebene:
     def getnormal(self):
         v1 = self.getVector1()
         v2 = self.getVector2()      
-        vecpr =[ v1[1]*v2[2]-v[2]*v2[1], v1[2]*v2[0]-v[0]*v2[2], v1[0]*v2[1]-v[1]*v2[0] ]
+        vecpr =[ v1[1]*v2[2]-v1[2]*v2[1], v1[2]*v2[0]-v1[0]*v2[2], v1[0]*v2[1]-v1[1]*v2[0] ]
         vecprLength = (vecpr[0]**2+vecpr[1]**2+vecpr[2]**2)**0,5
         vecpr[0] /= vecprLength
         vecpr[1] /= vecprLength
