@@ -130,7 +130,7 @@ class Ebene:
         v2 = self.getVector2()      
         vecpr =[ v1[1]*v2[2]-v1[2]*v2[1], v1[2]*v2[0]-v1[0]*v2[2], v1[0]*v2[1]-v1[1]*v2[0] ]
         #Die Normierung ist für die Methode getnormal_0(self): gedacht
-        #vecprLength = (vecpr[0]**2+vecpr[1]**2+vecpr[2]**2)**0,5
+        #vecprLength = (vecpr[0]**2+vecpr[1]**2+vecpr[2]**2)**0.5
         #vecpr[0] /= vecprLength
         #vecpr[1] /= vecprLength
         #vecpr[2] /= vecprLength
@@ -331,6 +331,11 @@ class Gerade:
 
 class EbeneHess:
     def __init__(self, d, normal0):
+        if(type(d)==float or type(d)==int):
+            self._d = d
+        else:
+            raise TypeError("d needs to be a real number! d was of type '{}'.".format(type(d).__name__))
+
         if(type(normal0)==list):
 
             if(len(normal0)==3):
@@ -339,12 +344,13 @@ class EbeneHess:
                         raise TypeError("The entries of normal0 need to be real numbers! normal0[0] was of type '" +
                         "{}', normal0[1] was of type '{}', ".format(type(normal0[0]).__name__, type(normal0[1]).__name__) +
                         "and normal0[2] was of type '{}'.".format(type(normal0[2]).__name__))
-                normal0Length = (normal0[0]**2 + normal0[1]**2 + normal0[2]**2)**0.5
+                normal0Length = (normal0[0]**2+normal0[1]**2+normal0[2]**2)**0.5
                 normal0[0] /= normal0Length
                 normal0[1] /= normal0Length
                 normal0[2] /= normal0Length
                 self._normal0 = normal0
 
+<<<<<<< HEAD
                 if(type(d)==float or type(d)==int):
                     if(d>=0):
                         self._d = d
@@ -352,6 +358,8 @@ class EbeneHess:
                         raise ArithmeticError("d needs to be bigger than/equal to 0.")
                 else:
                     raise TypeError("d needs to be a real number! d was of type '{}'.".format(type(d).__name__))
+=======
+>>>>>>> eddbc2f92b88d2f71da0a9d421b1ab5715014c75
             else:
                 raise IndexError("normal0 needs to be of length 3! normal0 was of length '{}'.".format(len(normal0)))
 
@@ -381,7 +389,7 @@ class EbeneHess:
                         raise TypeError("The entries of normal0 need to be real numbers! normal0[0] was of type '" +
                         "{}', normal0[1] was of type '{}', ".format(type(normal0[0]).__name__, type(normal0[1]).__name__) +
                         "and normal0[2] was of type '{}'.".format(type(normal0[2]).__name__))
-                normal0Length = (normal0[0]**2 + normal0[1]**2 + normal0[2]**2)**0.5
+                normal0Length = (normal0[0]**2+normal0[1]**2+normal0[2]**2)**0.5
                 normal0[0] /= normal0Length
                 normal0[1] /= normal0Length
                 normal0[2] /= normal0Length
@@ -391,6 +399,9 @@ class EbeneHess:
                 raise IndexError("normal0 needs to be of length 3! normal0 was of length '{}'.".format(len(normal0)))
         else:
             raise TypeError("normal0 needs to be a list! normal0 was of type '{}'.".format(type(normal0).__name__))
+            
+    def __repr__(self):
+        return "EbenesHess({}, {})".format(self._d, self._normal0)
     
     def fromNormalToParametric(self):
         n0 = self.getNormal0()
@@ -416,12 +427,9 @@ class EbeneHess:
 
 testEbene = Ebene([1, -6662, 3], [1000, -2.3, 3], [-1, 0, 3])
 testGerade = Gerade([-200, 662, 3], [-991, 2, 33])
+testEbeneHess = EbeneHess(2, [1, 2, 0])
 
 print(testEbene)
 print(testGerade)
+print(EbeneHess)
 
-testEbene.move([1, 1, 1])
-testGerade.move([1, 1, 1])
-
-print(testEbene)
-print(testGerade)
