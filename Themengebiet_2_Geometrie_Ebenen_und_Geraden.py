@@ -415,11 +415,12 @@ class EbeneHess:
         for i in range(3):
             if(n0[i]!=float(0) or n0[i]!=int(0)):
                 stützvektor[i] =d/n0[i]
-            break
+                break
                 
-        
         richtungsvektor1 = [ 0, -n0[2] , n0[1] ]
         richtungsvektor2 = [ n0[1] , -n0[0] , 0 ]
+        
+        #c.f.: https://www.youtube.com/watch?v=lPV6O3mrA6A
         parametricPlane = Ebene(stützvektor, richtungsvektor1, richtungsvektor2)
         return parametricPlane
 
