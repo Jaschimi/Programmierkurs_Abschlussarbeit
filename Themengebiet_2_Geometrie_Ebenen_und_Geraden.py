@@ -389,6 +389,7 @@ class EbeneHess:
     
     def fromNormalToParametric(self):
         n0 = self.getNormal0()
+        d = self.getD()
         #der Stützvektor fehlt!
         #es ist d = stützvektor*normalenvektor >=0
             #suche einen von 0 verschiedenen eintrag im Normalenvektor, z.b. der 0te
