@@ -416,7 +416,7 @@ class EbeneHess:
 
         return ("     |x1|   |{}{}|\n".format(spacesN00, self._normal0[0]) + 
 
-                "E := |x2| * |{}{}| = {}\n".format(spacesN01, self._normal0[1], self._d) +
+                "E := |x2| * |{}{}| - {} = 0\n".format(spacesN01, self._normal0[1], self._d) +
                 
                 "     |x3|   |{}{}|\n".format(spacesN02, self._normal0[2]))
         
@@ -452,5 +452,5 @@ testEbeneHess = EbeneHess(2, [1, 2, 0])
 
 print(testEbene)
 print(testGerade)
-print(EbeneHess)
+print(testEbeneHess)
 
