@@ -137,6 +137,7 @@ class Ebene:
         return vecpr
     
     def __str__(self):
+        print()
         #Easy access for the length of the entries in x0
         lengthOfX00 = len(str(self._x0[0]))
         lengthOfX01 = len(str(self._x0[1]))
@@ -280,6 +281,7 @@ class Gerade:
             raise TypeError("vector1 needs to be a list! vector1 was of type '{}'.".format(type(vector1).__name__))
 
     def __str__(self):
+        print()
         #Easy access for the length of the entries in x0
         lengthOfX00 = len(str(self._x0[0]))
         lengthOfX01 = len(str(self._x0[1]))
@@ -326,6 +328,84 @@ class Gerade:
     def __repr__(self):
         return "Gerade({}, {})".format(self._x0, self._vector1)
 
+
+class EbeneHess:
+    def __init__(self, d, normal0):
+        if(type(normal0)==list):
+
+            if(len(normal0)==3):
+                for i in normal0:
+                    if(not(type(i)==float or type(i)==int)):
+                        raise TypeError("The entries of normal0 need to be real numbers! normal0[0] was of type '" +
+                        "{}', normal0[1] was of type '{}', ".format(type(normal0[0]).__name__, type(normal0[1]).__name__) +
+                        "and normal0[2] was of type '{}'.".format(type(normal0[2]).__name__))
+                normal0Length = (normal0[0]**2+normal0[1]**2+normal0[2]**2)**0,5
+                normal0[0] /= normal0Length
+                normal0[1] /= normal0Length
+                normal0[2] /= normal0Length
+                self._normal0 = normal0
+
+                if(type(d)==float or type(d)==int):
+                    self._d = d
+                else:
+                    raise TypeError("d needs to be a real number! d was of type '{}'.".format(type(d).__name__))
+            else:
+                raise IndexError("normal0 needs to be of length 3! normal0 was of length '{}'.".format(len(normal0)))
+
+        else:
+            raise TypeError("normal0 needs to be a list! normal0 was of type '{}'.".format(type(normal0).__name__))
+
+    def getD(self):
+        return self._d
+
+    def getNormal0(self):
+        return self._normal0
+
+    def setD(self, d):
+        if(type(x0)==list):
+            if(len(x0)==3):
+                for i in x0:
+                    if(not(type(i)==float or type(i)==int)):
+                        raise TypeError("The entries of x0 need to be real numbers! x0[0] was of type '" +
+                        "{}', x0[1] was of type '{}', ".format(type(x0[0]).__name__, type(x0[1]).__name__) +
+                        "and x0[2] was of type '{}'.".format(type(x0[2]).__name__))
+                self._x0 = x0
+
+            else:
+                raise IndexError("x0 needs to be of length 3! x0 was of length '{}'.".format(len(x0)))
+        else:
+            raise TypeError("x0 needs to be a list! x0 was of type '{}'.".format(type(x0).__name__))
+
+    def setVector1(self, vector1):
+        if(type(vector1)==list):
+            if(len(vector1)==3):
+                for i in vector1:
+                    if(not(type(i)==float or type(i)==int)):
+                        raise TypeError("The entries of vector1 need to be real numbers! vector1[0] was of type '" +
+                        "{}', vector1[1] was of type '{}', ".format(type(vector1[0]).__name__, type(vector1[1]).__name__) +
+                        "and vector1[2] was of type '{}'.".format(type(vector1[2]).__name__))
+                self._vector1 = vector1
+
+            else:
+                raise IndexError("vector1 needs to be of length 3! vector1 was of length '{}'.".format(len(vector1)))
+        else:
+            raise TypeError("vector1 needs to be a list! vector1 was of type '{}'.".format(type(vector1).__name__))
+
+    def setVector2(self, vector2):
+        if(type(vector2)==list):
+            if(len(vector2)==3):
+                for i in vector2:
+                    if(not(type(i)==float or type(i)==int)):
+                        raise TypeError("The entries of vector2 need to be real numbers! vector2[0] was of type '" +
+                        "{}', vector2[1] was of type '{}', ".format(type(vector2[0]).__name__, type(vector2[1]).__name__) +
+                        "and vector2[2] was of type '{}'.".format(type(vector2[2]).__name__))
+                self._vector2 = vector2
+
+            else:
+                raise IndexError("vector2 needs to be of length 3! vector2 was of length '{}'.".format(len(vector2)))
+        else:
+            raise TypeError("vector2 needs to be a list! vector2 was of type '{}'.".format(type(vector2).__name__))
+            
 testEbene = Ebene([1, -6662, 3], [1000, -2.3, 3], [-1, 0, 3])
 testGerade = Gerade([-200, 662, 3], [-991, 2, 33])
 
