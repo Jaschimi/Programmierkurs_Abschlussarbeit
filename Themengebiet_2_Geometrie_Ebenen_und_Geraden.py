@@ -410,7 +410,7 @@ class EbeneHess:
     def changeFormNormalToParametric(self):
         n_0 = self.getNormal0()
         d = self.getD()
-        #der stützvektor muss noch überreicht werden in ebene hess!
+        #der stützvektor muss noch überreicht werden in ebeneHess!
         stützvektor = [0,0,0]
         richtungsvektor1 =[0, -n_0[2], n_0[1]]
         richtungsvektor2 = [n_0[1], n_0[0], 0]
