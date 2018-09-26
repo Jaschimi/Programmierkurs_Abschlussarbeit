@@ -123,6 +123,14 @@ class Ebene:
                 raise IndexError("vector2 needs to be of length 3! vector2 was of length '{}'.".format(len(vector2)))
         else:
             raise TypeError("vector2 needs to be a list! vector2 was of type '{}'.".format(type(vector2).__name__))
+            
+          
+    def getnormal(self):
+        #pseudocode
+            #getvector1
+            #getvector2
+            #_vectorpr = kreuzprodukt
+            #return _vectorpr
 
     def __str__(self):
         #Easy access for the length of the entries in x0
