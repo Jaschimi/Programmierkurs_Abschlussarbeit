@@ -405,6 +405,17 @@ class EbeneHess:
                 raise IndexError("vector2 needs to be of length 3! vector2 was of length '{}'.".format(len(vector2)))
         else:
             raise TypeError("vector2 needs to be a list! vector2 was of type '{}'.".format(type(vector2).__name__))
+
+    #normalenform zur parameterform
+    def changeFormNormalToParametric(self):
+        n_0 = self.getNormal0()
+        d = self.getD()
+        #der stützvektor muss noch überreicht werden in ebene hess!
+        stützvektor = [0,0,0]
+        richtungsvektor1 =[0, -n_0[2], n_0[1]]
+        richtungsvektor2 = [n_0[1], n_0[0], 0]
+        parametricForm = Ebene(stützvektor, richtungsvektor1, richtungsvektor2)
+        return parametricForm
             
 testEbene = Ebene([1, -6662, 3], [1000, -2.3, 3], [-1, 0, 3])
 testGerade = Gerade([-200, 662, 3], [-991, 2, 33])
