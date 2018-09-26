@@ -133,7 +133,7 @@ class Ebene:
 
     def getnormal0(self):
         vecpr = self.getnormal()
-        vecprLength = (vecpr[0]**2+vecpr[1]**2+vecpr[2]**2)**0,5
+        vecprLength = (vecpr[0]**2+vecpr[1]**2+vecpr[2]**2)**0.5
         vecpr[0] /= vecprLength
         vecpr[1] /= vecprLength
         vecpr[2] /= vecprLength
@@ -146,10 +146,9 @@ class Ebene:
         return vecpr
 
     def para_to_hess(self):
-        hesseform = EbeneHess([0,0,0],[0,0,0])
-        hesseform._normal0 = self.getnormal0()
-        hesseform._d = self._x0*hesseform._normal0
-        return(str(hesseform))
+        hesse_normal0 = self.getnormal0()
+        hesse_d = self._x0*hesse_normal0
+        return(EbeneHess(hesse_d,hesse_normal0))
 
     def __str__(self):
         print()
