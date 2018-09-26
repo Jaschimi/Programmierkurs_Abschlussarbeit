@@ -137,6 +137,7 @@ class Ebene:
         return vecpr           
         
     def __str__(self):
+        print()
         #Easy access for the length of the entries in x0
         lengthOfX00 = len(str(self._x0[0]))
         lengthOfX01 = len(str(self._x0[1]))
@@ -186,6 +187,7 @@ class Ebene:
         spacesV21 = " " * spacesV21
         spacesV22 = " " * spacesV22
 
+        
         return ("    {}{} {} {}{} * s {} {}{} * t\n".format(spacesX00, self._x0[0], "+" if (self._vector1[0]>=0) else "-", spacesV10, self._vector1[0] if self._vector1[0]>=0 else -self._vector1[0], "+" if (self._vector2[0]>=0) else "-", spacesV20, self._vector2[0] if self._vector2[0]>=0 else -self._vector2[0]) + 
 
                 "E = {}{} {} {}{} * s {} {}{} * t\n".format(spacesX01, self._x0[1], "+" if (self._vector1[1]>=0) else "-", spacesV11, self._vector1[1] if self._vector1[1]>=0 else -self._vector1[1], "+" if (self._vector2[1]>=0) else "-", spacesV21, self._vector2[1] if self._vector2[1]>=0 else -self._vector2[1]) +
@@ -280,6 +282,7 @@ class Gerade:
             raise TypeError("vector1 needs to be a list! vector1 was of type '{}'.".format(type(vector1).__name__))
 
     def __str__(self):
+        print()
         #Easy access for the length of the entries in x0
         lengthOfX00 = len(str(self._x0[0]))
         lengthOfX01 = len(str(self._x0[1]))
