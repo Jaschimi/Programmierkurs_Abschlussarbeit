@@ -397,6 +397,30 @@ class EbeneHess:
         else:
             raise TypeError("normal0 needs to be a list! normal0 was of type '{}'.".format(type(normal0).__name__))
             
+    def __str__(self):
+        print()
+        #Easy access for the length of the entries in vector1
+        lengthOfN00 = len(str(self._normal0[0]))
+        lengthOfN01 = len(str(self._normal0[1]))
+        lengthOfN02 = len(str(self._normal0[2]))
+
+        #Calculating the amount of spaces needed in front of the three entries of vector1
+        mostDigitsN0 =  lengthOfN00 if (lengthOfN00>lengthOfN01) else (lengthOfN01 if (lengthOfN01>lengthOfN02) else lengthOfN02)
+        
+        spacesN00 = mostDigitsN0 - lengthOfN00
+        spacesN01 = mostDigitsN0 - lengthOfN01
+        spacesN02 = mostDigitsN0 - lengthOfN02
+
+        spacesN00 = " " * spacesN00
+        spacesN01 = " " * spacesN01
+        spacesN02 = " " * spacesN02
+
+        return ("     |x1|   |{}{}|\n".format(spacesN00, self._normal0[0]) + 
+
+                "E := |x2| * |{}{}| = {}\n".format(spacesN01, self._normal0[1], self._d) +
+                
+                "     |x3|   |{}{}|\n".format(spacesN02, self._normal0[2]))
+        
     def __repr__(self):
         return "EbeneHess({}, {})".format(self._d, self._normal0)
     
@@ -412,7 +436,7 @@ class EbeneHess:
         for i in range(3):
             if(n0[i]!=float(0) or n0[i]!=int(0)):
                 stützvektor[i] =d/n0[i]
-            break
+                break
                 
         
         richtungsvektor1 = [ 0, -n0[2] , n0[1] ]
