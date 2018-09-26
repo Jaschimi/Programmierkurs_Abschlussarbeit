@@ -386,6 +386,18 @@ class EbeneHess:
                 raise IndexError("normal0 needs to be of length 3! normal0 was of length '{}'.".format(len(normal0)))
         else:
             raise TypeError("normal0 needs to be a list! normal0 was of type '{}'.".format(type(normal0).__name__))
+    
+    def fromNormalToParametric(self):
+        n0 = self.getNormal0()
+
+        #der Stützvektor fehlt bei der Initialisierung!
+        stützvektor = [0,0,0]
+        richtungsvektor1 = [ 0, -n0[2] , n0[1] ]
+        richtungsvektor2 = [ n0[1] , -n0[0] , 0 ]
+        parametricPlane = Ebene(stützvektor, richtungsvektor1, richtungsvektor2)
+        return parametricPlane
+
+                
 
 testEbene = Ebene([1, -6662, 3], [1000, -2.3, 3], [-1, 0, 3])
 testGerade = Gerade([-200, 662, 3], [-991, 2, 33])
