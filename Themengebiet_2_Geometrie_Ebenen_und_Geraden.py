@@ -46,8 +46,8 @@ class Ebene:
                 self._vector2 = vector2
             else:
                 raise IndexError("x0, vector1, and vector2 need to be of length 3! x0 was of length '" +
-            "{}', vector1 was of type '{}', ".format(len(x0), len(vector1)) +
-            "and vector2 was of type '{}'.".format(len(vector2)))
+            "{}', vector1 was of length '{}', ".format(len(x0), len(vector1)) +
+            "and vector2 was of length '{}'.".format(len(vector2)))
 
         else:
             raise TypeError("x0, vector1, and vector2 need to be lists! x0 was of type '" +
@@ -134,8 +134,8 @@ class Ebene:
         #vecpr[0] /= vecprLength
         #vecpr[1] /= vecprLength
         #vecpr[2] /= vecprLength
-        return vecpr           
-        
+        return vecpr
+    
     def __str__(self):
         #Easy access for the length of the entries in x0
         lengthOfX00 = len(str(self._x0[0]))
