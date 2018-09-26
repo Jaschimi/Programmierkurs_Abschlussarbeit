@@ -337,7 +337,6 @@ class EbeneHess:
             raise TypeError("d needs to be a real number! d was of type '{}'.".format(type(d).__name__))
 
         if(type(normal0)==list):
-
             if(len(normal0)==3):
                 for i in normal0:
                     if(not(type(i)==float or type(i)==int)):
@@ -350,16 +349,16 @@ class EbeneHess:
                 normal0[2] /= normal0Length
                 self._normal0 = normal0
 
+
                 if(type(d)==float or type(d)==int):
                     if(d>=0):
                         self._d = d
                     else:
-                        raise ArithmeticError("d needs to be greater than or equal 0.")
+                        raise ArithmeticError("d needs to be greater than/equal to 0.")
                 else:
                     raise TypeError("d needs to be a real number! d was of type '{}'.".format(type(d).__name__))
             else:
                 raise IndexError("normal0 needs to be of length 3! normal0 was of length '{}'.".format(len(normal0)))
-
         else:
             raise TypeError("normal0 needs to be a list! normal0 was of type '{}'.".format(type(normal0).__name__))
 
@@ -374,7 +373,7 @@ class EbeneHess:
             if(d>=0):
                 self._d = d
             else:
-                raise ArithmeticError("d needs to be bigger than/equal to 0.")
+                raise ArithmeticError("d needs to be greater than/equal to 0.")
         else:
             raise TypeError("d needs to be a real number! d was of type '{}'.".format(type(d).__name__))
 
@@ -438,9 +437,10 @@ class EbeneHess:
                 stützvektor[i] =d/n0[i]
                 break
                 
-        
         richtungsvektor1 = [ 0, -n0[2] , n0[1] ]
         richtungsvektor2 = [ n0[1] , -n0[0] , 0 ]
+        
+        #c.f.: https://www.youtube.com/watch?v=lPV6O3mrA6A
         parametricPlane = Ebene(stützvektor, richtungsvektor1, richtungsvektor2)
         return parametricPlane
 
