@@ -346,7 +346,10 @@ class EbeneHess:
                 self._normal0 = normal0
 
                 if(type(d)==float or type(d)==int):
-                    self._d = d
+                    if(d>=0):
+                        self._d = d
+                    else:
+                        raise ArithmeticError("d needs to be bigger than/equal to 0.")
                 else:
                     raise TypeError("d needs to be a real number! d was of type '{}'.".format(type(d).__name__))
             else:
@@ -363,8 +366,10 @@ class EbeneHess:
 
     def setD(self, d):
         if(type(d)==float or type(d)==int):
-            self._d = d
-
+            if(d>=0):
+                self._d = d
+            else:
+                raise ArithmeticError("d needs to be bigger than/equal to 0.")
         else:
             raise TypeError("d needs to be a real number! d was of type '{}'.".format(type(d).__name__))
 
@@ -390,7 +395,6 @@ class EbeneHess:
     def fromNormalToParametric(self):
         n0 = self.getNormal0()
         d = self.getD()
-        #der Stützvektor fehlt!
         #es ist d = stützvektor*normalenvektor >=0
             #suche einen von 0 verschiedenen eintrag im Normalenvektor, z.b. der 0te
             #setze den ersten und zweiten eintrag des stützvektors auf 0
