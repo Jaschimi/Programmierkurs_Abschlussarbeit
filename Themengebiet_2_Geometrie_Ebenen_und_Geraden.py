@@ -263,7 +263,7 @@ class Gerade:
 
 
     def isOn(self,point):
-        if(type(point==list)):
+        if(type(point)==list or type(point)==tuple):
             if(len(point)==3):
                 aufpunkt = self.getX0()
                 print("der zu untersuchende punkt ist ",point)
@@ -271,27 +271,36 @@ class Gerade:
                 richtungsvektor = self.getVector1()
                 print("der richtungsvektor ist ", richtungsvektor)
                 diff = [ point[0]-aufpunkt[0] , point[1]-aufpunkt[1] , point[2]-aufpunkt[2] ]
-                r = 0  #lösung der geradengleichung
+                r = [0,0,0]  #lösung der geradengleichung
                 
                 for i in range(3):
                     if(diff[i]!=0 and richtungsvektor[i]!=0):
-                        r =diff[i]/richtungsvektor[i]
+                        r[i] =diff[i]/richtungsvektor[i]
+                        
 
-                    if(diff[i]!=0 and richtungsvektor[i]==0):
+                    elif(diff[i]!=0 and richtungsvektor[i]==0):
                         return print("nope, nicht auf gerade.")
 
-                    if(diff[i]==0 and richtungsvektor[i]!=0):
+                    elif(diff[i]==0 and richtungsvektor[i]!=0):
                         #jetzt muss r=0 sein, damit man chance auf erfolg hat
                         
                         if(r!=0):
                             return print("nope, nicht auf gerade.")
+                        
                     else:
                     #also if(diff[i]==0 and richtungsvektor[i]==0):
-                        pass 
-                return print("jo, liegt drauf")
-                
-
-
+                        r[i] = "beliebig wählbar" 
+                print(r)
+                answers = []
+                for k in range(3):
+                    if(type(r[k])==str):
+                        continue
+                    else:
+                        answers.append(r[k])
+                if(len(answers)<2):
+                    return print("jo, liegt auf der gerade")
+                else:
+                    return print("nope, nicht auf gerade.")
 
             else:
                 raise IndexError("your input needs to be of length 3! it was of length '{}'.".format(len(point)))
@@ -521,10 +530,26 @@ print(testEbeneHessToPara)
 # testGerade.isOn(testGerade.getX0())
 # testGerade.isOn(testGerade.getVector1())
 # testGerade.isOn([0,0,0])
+testEbeneHess = EbeneHess(2, [1, 1, 1])
 
+print(testEbene)
+print(testGerade)
+print(testEbeneHess)
+
+testGerade2 = Gerade([1,0,0],[0,1,0])
+testGerade2.isOn([1,0,0])
+testGerade2.isOn([0,1,0])
+testGerade2.isOn([1,2,0]) 
+
+#testEbeneHessToPara = testEbeneHess.toPara()
+
+#print(testEbeneHessToPara)
+
+#testEbeneHessToParaToHess = testEbeneHessToPara.toHess()
 
 # testGerade2 = Gerade([1,0,0], [0,1,0])
 # testGerade2.isOn([1,0,0])
 # testGerade2.isOn(testGerade2.getVector1())
 # testGerade2.isOn([0,0,1])
 # testGerade2.isOn([1,2,0])
+#print(testEbeneHessToParaToHess)
