@@ -149,7 +149,7 @@ class Ebene:
             hesse_d += self._x0[i]*vecpr[i]
         return EbeneHess(hesse_d,vecpr)
 
-    def ison(self,y):
+    def isOn(self,y):
         if(type(y)==list or type(y) == tuple):
             if(len(y)==3):
                 for i in range(len(y)):
@@ -309,18 +309,20 @@ class Gerade:
                         
 
                     elif(diff[i]!=0 and richtungsvektor[i]==0):
-                        return print("nope, nicht auf gerade.")
+                        #return print("nope, nicht auf gerade.")
+                        return False
 
                     elif(diff[i]==0 and richtungsvektor[i]!=0):
                         #jetzt muss r=0 sein, damit man chance auf erfolg hat
                         
                         if(r!=0):
-                            return print("nope, nicht auf gerade.")
+                            #return print("nope, nicht auf gerade.")
+                            return False
                         
                     else:
                     #also if(diff[i]==0 and richtungsvektor[i]==0):
                         r[i] = "beliebig wählbar" 
-                print(r)
+                #print(r)
                 answers = []
                 for k in range(3):
                     if(type(r[k])==str):
@@ -328,9 +330,11 @@ class Gerade:
                     else:
                         answers.append(r[k])
                 if(len(answers)<2):
-                    return print("jo, liegt auf der gerade")
+                    return True
+                    #return print("jo, liegt auf der gerade")
                 else:
-                    return print("nope, nicht auf gerade.")
+                    return False
+                    #return print("nope, nicht auf gerade.")
 
             else:
                 raise IndexError("your input needs to be of length 3! it was of length '{}'.".format(len(point)))
