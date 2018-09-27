@@ -315,7 +315,7 @@ class Gerade:
                     elif(diff[i]==0 and richtungsvektor[i]!=0):
                         #jetzt muss r=0 sein, damit man chance auf erfolg hat
                         
-                        if(r!=0):
+                        if(r[i]!=0):
                             #return print("nope, nicht auf gerade.")
                             return False
                         
@@ -544,7 +544,7 @@ class EbeneHess:
                 
 
 testGerade = Gerade([-200, 662, 3], [-991, 2, 33])
-# print(testGerade)
+print(testGerade)
 
 # testEbeneHess = EbeneHess(1, [4, 4, 4])
 # print(testEbeneHess)
