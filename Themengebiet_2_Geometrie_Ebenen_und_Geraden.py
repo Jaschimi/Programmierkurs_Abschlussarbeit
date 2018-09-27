@@ -258,6 +258,43 @@ class Gerade:
         else:
             raise TypeError("vec needs to be a list! vec was of type '{}'.".format(type(vec).__name__))
 
+
+    def isOnGerade(self,point):
+        if(type(point==list)):
+            if(len(point)==3):
+                aufpunkt = self.getX0()
+                print("der zu untersuchende punkt ist ",point)
+                print("der stützpunkt ist ",aufpunkt)
+                richtungsvektor = self.getVector1()
+                print("der richtungsvektor ist ", richtungsvektor)
+                diff = [ point[0]-aufpunkt[0] , point[1]-aufpunkt[1] , point[2]-aufpunkt[2] ]
+                r = 0  #lösung der geradengleichung
+                
+                for i in range(3):
+                    if(diff[i]!=0 and richtungsvektor[i]!=0):
+                        r =diff[i]/richtungsvektor[i]
+
+                    if(diff[i]!=0 and richtungsvektor[i]==0):
+                        return print("nope, nicht auf gerade.")
+
+                    if(diff[i]==0 and richtungsvektor[i]!=0):
+                        #jetzt muss r=0 sein, damit man chance auf erfolg hat
+                        
+                        if(r!=0):
+                            return print("nope, nicht auf gerade.")
+                    else:
+                    #also if(diff[i]==0 and richtungsvektor[i]==0):
+                        pass 
+                return print("jo, liegt drauf")
+                
+
+
+
+            else:
+                raise IndexError("your input needs to be of length 3! it was of length '{}'.".format(len(point)))
+        else:
+            raise TypeError("your input needs to be a list! it was of type '{}'.".format(type(point).__name__)) 
+
     def getX0(self):
         return self._x0
 
@@ -463,3 +500,13 @@ print(testEbene)
 print(testGerade)
 print(testEbeneHess)
 
+testGerade.isOnGerade(testGerade.getX0())
+testGerade.isOnGerade(testGerade.getVector1())
+testGerade.isOnGerade([0,0,0])
+
+
+testGerade2 = Gerade([1,0,0], [0,1,0])
+testGerade2.isOnGerade([1,0,0])
+testGerade2.isOnGerade(testGerade2.getVector1())
+testGerade2.isOnGerade([0,0,1])
+testGerade2.isOnGerade([1,2,0])
