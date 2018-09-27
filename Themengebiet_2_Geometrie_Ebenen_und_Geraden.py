@@ -150,16 +150,31 @@ class Ebene:
         return EbeneHess(hesse_d,vecpr)
 
     def ison(self,y):
-        check = toHess
-        d = check.getD
-        n0 = check.getNormal0
-        for i in range(3):
-            k = 0
-            k += n0[i]*y[i]
-        if k-d = 0 :
-            print("The point {} does lay in the plain".format(y))
+        if(type(y)==list or type(y) == tuple):
+            if(len(y)==3):
+                for i in range(len(y)):
+                    if(not(type(y[i])==float or type(y[i])==int)):
+                        raise TypeError("The entries of {} need to be real numbers! {}[] was of type '".format(y,y) +
+                            "{}', {}[1] was of type '{}', ".format(type(y[0]).__name__, y, type(y[1]).__name__) +
+                            "and {}[2] was of type '{}'.".format(y, type(y[2]).__name__))
+                    else:
+                        check = self.toHess()
+                        d = check.getD()
+                        n0 = check.getNormal0()
+                        k = 0
+                        for i in range(3):
+                            k += n0[i]*y[i]
+                    if k-d == 0 :
+                        return True
+                    else:
+                        return False
+                        
+
+            else:
+                raise IndexError("{} needs to be of length 3! {} was of length '{}'.".format(y,y,len(y)))
         else:
-            print("The point {} doesn't lay in the plain".format(y))
+            raise TypeError("{} needs to be a list or tuple! {} was of type '{}'.".format(y, y, type(y).__name__))
+        
 
     def __str__(self):
         print()
