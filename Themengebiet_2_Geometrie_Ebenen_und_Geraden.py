@@ -163,9 +163,9 @@ class Ebene:
             k = 0
             k += n0[i]*y[i]
         if k-d = 0 :
-            print("Der Punkt {} liegt in der Ebene".format(y))
+            print("The point {} does lay in the plain".format(y))
         else:
-            print("Der Punkt {} liegt nicht in der Ebene".format(y))
+            print("The point {} doesn't lay in the plain".format(y))
 
     def __str__(self):
         print()
