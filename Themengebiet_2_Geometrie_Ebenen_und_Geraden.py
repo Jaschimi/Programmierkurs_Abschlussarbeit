@@ -149,7 +149,6 @@ class Ebene:
             hesse_d += self._x0[i]*vecpr[i]
         return EbeneHess(hesse_d,vecpr)
 
-<<<<<<< HEAD
     def ison(self,y):
         if(type(y)==list or type(y) == tuple):
             if(len(y)==3):
@@ -176,21 +175,6 @@ class Ebene:
         else:
             raise TypeError("{} needs to be a list or tuple! {} was of type '{}'.".format(y, y, type(y).__name__))
         
-=======
-    def isOn(self,y):
-        check = self.toHess()
-        d = check.getD()
-        n0 = check.getNormal0()
-        k = 0
-        for i in range(3):
-            k += n0[i]*y[i]
-        if k-d == 0 :
-            # print("Der Punkt {} liegt in der Ebene".format(y))
-            return True
-        else:
-            # print("Der Punkt {} liegt nicht in der Ebene".format(y))
-            return False
->>>>>>> 36b3a16748e16af454e6bbc13d02e6e01193f6b5
 
     def __str__(self):
         print()
