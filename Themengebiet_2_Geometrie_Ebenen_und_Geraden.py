@@ -160,16 +160,14 @@ class Ebene:
         vecpr[0] /= vecprLength
         vecpr[1] /= vecprLength
         vecpr[2] /= vecprLength
-        p0 = 0
-        for i in range(3):
-            p0 += self._x0[i]*vecpr[i]
-        if p0 < 0:
-            for i in range(3):
-                vecpr[i] = vecpr[i]*(-1)
-                
         hesse_d = 0
         for i in range(3):
             hesse_d += self._x0[i]*vecpr[i]
+        if hesse_d < 0:
+            for i in range(3):
+                vecpr[i] *= -1
+            hesse_d *= -1
+                
         return EbeneHess(hesse_d,vecpr)
 
     def isOn(self,y):
