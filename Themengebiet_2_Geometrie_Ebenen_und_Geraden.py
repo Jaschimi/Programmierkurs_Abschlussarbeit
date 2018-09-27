@@ -178,9 +178,9 @@ class Ebene:
             if(len(y)==3):
                 for i in range(len(y)):
                     if(not(type(y[i])==float or type(y[i])==int)):
-                        raise TypeError("The entries of {} need to be real numbers! {}[0] was of type '".format(y,y) +
-                            "{}', {}[1] was of type '{}', ".format(type(y[0]).__name__, y, type(y[1]).__name__) +
-                            "and {}[2] was of type '{}'.".format(y, type(y[2]).__name__))
+                        raise TypeError("The entries of y need to be real numbers! y[0] was of type '" +
+                            "{}', y[1] was of type '{}', ".format(type(y[0]).__name__, type(y[1]).__name__) +
+                            "and y[2] was of type '{}'.".format(type(y[2]).__name__))
                     
                 check = self.toHess()
                 d = check.getD()
@@ -195,9 +195,9 @@ class Ebene:
                         
 
             else:
-                raise IndexError("{} needs to be of length 3! {} was of length '{}'.".format(y,y,len(y)))
+                raise IndexError("y needs to be of length 3! y was of length '{}'.".format(len(y)))
         else:
-            raise TypeError("{} needs to be a list or tuple! {} was of type '{}'.".format(y, y, type(y).__name__))
+            raise TypeError("y needs to be a list or tuple! y was of type '{}'.".format(type(y).__name__))
         
 
     def __str__(self):
@@ -581,7 +581,7 @@ print(testGerade)
 
 
 testEbene = Ebene([0, 0, 0], [1, 0, 0], [2, 1, 0])
-print(testEbene.isOn([0, 0, "hdf"]))
+print(testEbene.isOn([0, 0, "hdl"]))
 
 # print(testEbene.isOn([1, 0, 0]))
 # print(testEbene.isOn([0, -1, 0]))
