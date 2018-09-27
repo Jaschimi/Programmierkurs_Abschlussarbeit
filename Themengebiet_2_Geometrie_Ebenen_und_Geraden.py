@@ -31,6 +31,29 @@ class Ebene:
                         "and x0[2] was of type '{}'.".format(type(x0[2]).__name__))
                 self._x0 = x0
 
+                mult = [True, True, True]
+                for i in range(len(vector1)):
+                    if(vector2[i]!=0):
+                        mult[i] = vector1[i]/vector2[i]
+                    elif(vector1[i]==0):
+                        mult[i] = "bel"
+                    else:
+                        mult[i] = False
+                for i in range(len(mult)):
+                    if(mult[i] == "bel"):
+                        if(mult[i-1] == "bel"):
+                            if(mult[i-2] == "bel"):
+                                pass
+                            else:
+                                mult[i] = mult[i-2]
+                                mult[i-1] = mult[i-2]
+                        else:
+                            mult[i] = mult[i-1]
+
+
+                if(mult[0]==mult[1] and mult[1]==mult[2] and (type(mult[0])==int or type(mult[0])==float or type(mult[0])==str) and (type(mult[1])==int or type(mult[1])==float or type(mult[1])==str) and (type(mult[2])==int or type(mult[2])==float or type(mult[2])==str)):
+                    raise ArithmeticError("vector1 and vector2 are linear dependent.")
+
                 for i in vector1:
                     if(not(type(i)==float or type(i)==int)):
                         raise TypeError("The entries of vector1 need to be real numbers! vector1[0] was of type '" +
@@ -539,7 +562,7 @@ testGerade = Gerade([-200, 662, 3], [-991, 2, 33])
 # print(testEbeneHessToParaToHess)
 
 
-testEbene = Ebene([0, 0, 0], [0, 25, 0], [1, 0, 0])
+testEbene = Ebene([0, 0, 0], [0, 0, 0], [0, 0, 0])
 print(testEbene)
 
 print(testEbene.isOn([1, 0, 0]))
