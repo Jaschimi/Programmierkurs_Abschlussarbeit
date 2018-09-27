@@ -173,18 +173,31 @@ class Ebene:
         return EbeneHess(hesse_d,vecpr)
 
     def isOn(self,y):
-        check = self.toHess()
-        d = check.getD()
-        n0 = check.getNormal0()
-        k = 0
-        for i in range(3):
-            k += n0[i]*y[i]
-        if k-d == 0 :
-            # print("Der Punkt {} liegt in der Ebene".format(y))
-            return True
+        if(type(y)==list or type(y) == tuple):
+            if(len(y)==3):
+                for i in range(len(y)):
+                    if(not(type(y[i])==float or type(y[i])==int)):
+                        raise TypeError("The entries of {} need to be real numbers! {}[] was of type '".format(y,y) +
+                            "{}', {}[1] was of type '{}', ".format(type(y[0]).__name__, y, type(y[1]).__name__) +
+                            "and {}[2] was of type '{}'.".format(y, type(y[2]).__name__))
+                    else:
+                        check = self.toHess()
+                        d = check.getD()
+                        n0 = check.getNormal0()
+                        k = 0
+                        for i in range(3):
+                            k += n0[i]*y[i]
+                    if k-d == 0 :
+                        return True
+                    else:
+                        return False
+                        
+
+            else:
+                raise IndexError("{} needs to be of length 3! {} was of length '{}'.".format(y,y,len(y)))
         else:
-            # print("Der Punkt {} liegt nicht in der Ebene".format(y))
-            return False
+            raise TypeError("{} needs to be a list or tuple! {} was of type '{}'.".format(y, y, type(y).__name__))
+        
 
     def __str__(self):
         print()
@@ -299,7 +312,7 @@ class Gerade:
         if(type(point)==list or type(point)==tuple):
             if(len(point)==3):
                 
-                print("der zu untersuchende punkt ist ",point)
+                #print("der zu untersuchende punkt ist ",point)
                 for i in range(3):
                     if( not(type(point[i])==float or type(point[i])==int) ):
                         raise TypeError("The entries of point need to be real numbers! point[0] was of type '" +
@@ -307,9 +320,9 @@ class Gerade:
                         "and point[2] was of type '{}'.".format(type(point[2]).__name__))
                 
                 aufpunkt = self.getX0()
-                print("der stützpunkt ist ",aufpunkt)
+                #print("der stützpunkt ist ",aufpunkt)
                 richtungsvektor = self.getVector1()
-                print("der richtungsvektor ist ", richtungsvektor)
+                #print("der richtungsvektor ist ", richtungsvektor)
                 diff = [ point[0]-aufpunkt[0] , point[1]-aufpunkt[1] , point[2]-aufpunkt[2] ]
                 r = [0,0,0]  #lösung der geradengleichung
                 
@@ -319,18 +332,20 @@ class Gerade:
                         
 
                     elif(diff[i]!=0 and richtungsvektor[i]==0):
-                        return print("nope, nicht auf gerade.")
+                        #return print("nope, nicht auf gerade.")
+                        return False
 
                     elif(diff[i]==0 and richtungsvektor[i]!=0):
                         #jetzt muss r=0 sein, damit man chance auf erfolg hat
                         
-                        if(r!=0):
-                            return print("nope, nicht auf gerade.")
+                        if(r[i]!=0):
+                            #return print("nope, nicht auf gerade.")
+                            return False
                         
                     else:
                     #also if(diff[i]==0 and richtungsvektor[i]==0):
                         r[i] = "beliebig wählbar" 
-                print(r)
+                #print(r)
                 answers = []
                 for k in range(3):
                     if(type(r[k])==str):
@@ -338,9 +353,11 @@ class Gerade:
                     else:
                         answers.append(r[k])
                 if(len(answers)<2):
-                    return print("jo, liegt auf der gerade")
+                    return True
+                    #return print("jo, liegt auf der gerade")
                 else:
-                    return print("nope, nicht auf gerade.")
+                    return False
+                    #return print("nope, nicht auf gerade.")
 
             else:
                 raise IndexError("your input needs to be of length 3! it was of length '{}'.".format(len(point)))
@@ -550,7 +567,7 @@ class EbeneHess:
                 
 
 testGerade = Gerade([-200, 662, 3], [-991, 2, 33])
-# print(testGerade)
+print(testGerade)
 
 # testEbeneHess = EbeneHess(1, [4, 4, 4])
 # print(testEbeneHess)
@@ -573,7 +590,12 @@ print(testEbene.isOn([0, 1, 1]))
 print(testEbene.isOn([1, 0, 1]))
 print(testEbene.isOn([1, 1, 1]))
 
-
+testGerade2 = Gerade([1,0,0],[0,1,0])
+print(testGerade2.isOn(testGerade2.getX0()))
+print(testGerade2.isOn([0,1,0]))
+print(testGerade2.isOn([0,0,0]))
+print(testGerade2.isOn([1,2,0]))
+print(testGerade2.isOn([2,3,0]))
 # testEbeneHess = testEbene.toHess()
 # print(testEbeneHess)
 
