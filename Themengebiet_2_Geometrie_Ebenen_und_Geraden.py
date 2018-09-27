@@ -276,28 +276,31 @@ class Gerade:
                 for i in range(3):
                     if(diff[i]!=0 and richtungsvektor[i]!=0):
                         r[i] =diff[i]/richtungsvektor[i]
-                        if(i==1):
-                            if(r[0]!=r[1]):
-                                return print("nope, nicht auf gerade.")
-                        if(i==2):#da muss schon r[0]==r[1] gelten
-                            if(r[1]!=r[2]):
-                                return print("nope, nicht auf gerade.")   
+                        
 
-                    if(diff[i]!=0 and richtungsvektor[i]==0):
+                    elif(diff[i]!=0 and richtungsvektor[i]==0):
                         return print("nope, nicht auf gerade.")
 
-                    if(diff[i]==0 and richtungsvektor[i]!=0):
+                    elif(diff[i]==0 and richtungsvektor[i]!=0):
                         #jetzt muss r=0 sein, damit man chance auf erfolg hat
                         
                         if(r!=0):
                             return print("nope, nicht auf gerade.")
+                        
                     else:
                     #also if(diff[i]==0 and richtungsvektor[i]==0):
-                        pass 
-                return print("jo, liegt drauf")
-                
-
-
+                        r[i] = "beliebig wählbar" 
+                print(r)
+                answers = []
+                for k in range(3):
+                    if(type(r[k])==str):
+                        continue
+                    else:
+                        answers.append(r[k])
+                if(len(answers)<2):
+                    return print("jo, liegt auf der gerade")
+                else:
+                    return print("nope, nicht auf gerade.")
 
             else:
                 raise IndexError("your input needs to be of length 3! it was of length '{}'.".format(len(point)))
@@ -516,30 +519,22 @@ class EbeneHess:
                 
 
 testEbene = Ebene([1, -6662, 3], [1000, -2.3, 3], [-1, 0, 3])
-# testGerade = Gerade([-200, 662, 3], [-991, 2, 33])
+testGerade = Gerade([-200, 662, 3], [-991, 2, 33])
 testEbeneHess = EbeneHess(2, [1, 1, 1])
 
 print(testEbene)
-# print(testGerade)
+print(testGerade)
 print(testEbeneHess)
 
-<<<<<<< HEAD
-testEbeneHessToPara = testEbeneHess.toPara()
+testGerade2 = Gerade([1,0,0],[0,1,0])
+testGerade2.isOn([1,0,0])
+testGerade2.isOn([0,1,0])
+testGerade2.isOn([1,2,0]) 
 
-print(testEbeneHessToPara)
+#testEbeneHessToPara = testEbeneHess.toPara()
 
-testEbeneHessToParaToHess = testEbeneHessToPara.toHess()
+#print(testEbeneHessToPara)
 
-print(testEbeneHessToParaToHess)
-=======
-testGerade.isOnGerade(testGerade.getX0())
-testGerade.isOnGerade(testGerade.getVector1())
-testGerade.isOnGerade([0,0,0])
+#testEbeneHessToParaToHess = testEbeneHessToPara.toHess()
 
-
-testGerade2 = Gerade([1,0,0], [0,1,0])
-testGerade2.isOnGerade([1,0,0])
-testGerade2.isOnGerade(testGerade2.getVector1())
-testGerade2.isOnGerade([0,0,1])
-testGerade2.isOnGerade([1,2,0])
->>>>>>> 057ad2a4d144dcb177004506caa732dce59d8e6d
+#print(testEbeneHessToParaToHess)
