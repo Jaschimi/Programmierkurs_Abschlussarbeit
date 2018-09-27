@@ -126,9 +126,12 @@ class Ebene:
             
           
     def getnormal(self):
-        v1 = self.getVector1()
-        v2 = self.getVector2()      
+        v1 = self._vector1
+        print(v1)
+        v2 = self._vector2   
+        print(v2)
         vecpr =[ v1[1]*v2[2]-v1[2]*v2[1], v1[2]*v2[0]-v1[0]*v2[2], v1[0]*v2[1]-v1[1]*v2[0] ]
+        print(vecpr)
         return vecpr
 
     def getnormal0(self):
@@ -137,15 +140,15 @@ class Ebene:
         vecpr[0] /= vecprLength
         vecpr[1] /= vecprLength
         vecpr[2] /= vecprLength
+        p0 = 0
         for i in range(3):
-            p0 = 0
             p0 += self._x0[i]*vecpr[i]
         if p0 < 0:
             for i in range(3):
                 vecpr[i] = vecpr[i]*(-1)
         return vecpr
 
-    def para_to_hess(self):
+    def toHess(self):
         hesse_normal0 = self.getnormal0()
         hesse_d = self._x0*hesse_normal0
         return(EbeneHess(hesse_d,hesse_normal0))
@@ -432,7 +435,7 @@ class EbeneHess:
     def __repr__(self):
         return "EbeneHess({}, {})".format(self._d, self._normal0)
     
-    def hess_to_para(self):
+    def toPara(self):
         n0 = self.getNormal0()
         d = self.getD()
         #es ist d = stützvektor*normalenvektor >=0
@@ -440,26 +443,47 @@ class EbeneHess:
             #setze den ersten und zweiten eintrag des stützvektors auf 0
             #setze den 0ten eintrag auf d/n0[0]
         
-        stützvektor = [0,0,0]
-        for i in range(3):
-            if(n0[i]!=float(0) or n0[i]!=int(0)):
-                stützvektor[i] =d/n0[i]
-                break
-                
-        richtungsvektor1 = [ 0, -n0[2] , n0[1] ]
-        richtungsvektor2 = [ n0[1] , -n0[0] , 0 ]
+        if(d==0):
+            stützvektor = [0, 0, 0]
+        else:
+            if(n0[0]!=0):
+                stützvektor = [d/n0[0], 0, 0]
+
+                if(n0[1]!=0):
+                    point1 = [0, d/n0[1], 0]
+                    
+                    if(n0[2]!=0):
+                        point2 = [0, 0, d/n0[2]]
+                    else:
+                        stützvektor = [0, 0, 0]
+
+                else:
+                    stützvektor = [0, 0, 0]
+                    
+            else:
+                stützvektor = [0, 0, 0]
+
+        richtungsvektor1 = [point1[0]-stützvektor[0], point1[1]-stützvektor[1], point1[2]-stützvektor[2]]
+        richtungsvektor2 = [point2[0]-stützvektor[0], point2[1]-stützvektor[1], point2[2]-stützvektor[2]]
         
-        #c.f.: https://www.youtube.com/watch?v=lPV6O3mrA6A
+        #c.f.: https://www.youtube.com/watch?v=DmxdxCJgFAI
         parametricPlane = Ebene(stützvektor, richtungsvektor1, richtungsvektor2)
         return parametricPlane
 
                 
 
 testEbene = Ebene([1, -6662, 3], [1000, -2.3, 3], [-1, 0, 3])
-testGerade = Gerade([-200, 662, 3], [-991, 2, 33])
-testEbeneHess = EbeneHess(2, [1, 2, 0])
+# testGerade = Gerade([-200, 662, 3], [-991, 2, 33])
+testEbeneHess = EbeneHess(2, [1, 1, 1])
 
 print(testEbene)
-print(testGerade)
+# print(testGerade)
 print(testEbeneHess)
 
+testEbeneHessToPara = testEbeneHess.toPara()
+
+print(testEbeneHessToPara)
+
+testEbeneHessToParaToHess = testEbeneHessToPara.toHess()
+
+print(testEbeneHessToParaToHess)
