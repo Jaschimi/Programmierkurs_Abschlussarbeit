@@ -149,6 +149,7 @@ class Ebene:
             hesse_d += self._x0[i]*vecpr[i]
         return EbeneHess(hesse_d,vecpr)
 
+<<<<<<< HEAD
     def ison(self,y):
         if(type(y)==list or type(y) == tuple):
             if(len(y)==3):
@@ -175,6 +176,21 @@ class Ebene:
         else:
             raise TypeError("{} needs to be a list or tuple! {} was of type '{}'.".format(y, y, type(y).__name__))
         
+=======
+    def isOn(self,y):
+        check = self.toHess()
+        d = check.getD()
+        n0 = check.getNormal0()
+        k = 0
+        for i in range(3):
+            k += n0[i]*y[i]
+        if k-d == 0 :
+            # print("Der Punkt {} liegt in der Ebene".format(y))
+            return True
+        else:
+            # print("Der Punkt {} liegt nicht in der Ebene".format(y))
+            return False
+>>>>>>> 36b3a16748e16af454e6bbc13d02e6e01193f6b5
 
     def __str__(self):
         print()
@@ -288,8 +304,15 @@ class Gerade:
     def isOn(self,point):
         if(type(point)==list or type(point)==tuple):
             if(len(point)==3):
-                aufpunkt = self.getX0()
+                
                 print("der zu untersuchende punkt ist ",point)
+                for i in range(3):
+                    if( not(type(point[i])==float or type(point[i])==int) ):
+                        raise TypeError("The entries of point need to be real numbers! point[0] was of type '" +
+                        "{}', point[1] was of type '{}', ".format(type(point[0]).__name__, type(point[1]).__name__) +
+                        "and point[2] was of type '{}'.".format(type(point[2]).__name__))
+                
+                aufpunkt = self.getX0()
                 print("der stützpunkt ist ",aufpunkt)
                 richtungsvektor = self.getVector1()
                 print("der richtungsvektor ist ", richtungsvektor)
@@ -548,8 +571,17 @@ testGerade = Gerade([-200, 662, 3], [-991, 2, 33])
 testEbene = Ebene([0, 0, 0], [0, 25, 0], [1, 0, 0])
 print(testEbene)
 
-testEbeneHess = testEbene.toHess()
-print(testEbeneHess)
+print(testEbene.isOn([1, 0, 0]))
+print(testEbene.isOn([0, -1, 0]))
+print(testEbene.isOn([0, 0, 1]))
+print(testEbene.isOn([1, 1, 0]))
+print(testEbene.isOn([0, 1, 1]))
+print(testEbene.isOn([1, 0, 1]))
+print(testEbene.isOn([1, 1, 1]))
 
-testEbeneHessToPara = testEbeneHess.toPara()
-print(testEbeneHessToPara)
+
+# testEbeneHess = testEbene.toHess()
+# print(testEbeneHess)
+
+# testEbeneHessToPara = testEbeneHess.toPara()
+# print(testEbeneHessToPara)
