@@ -127,14 +127,11 @@ class Ebene:
           
     def getnormal(self):
         v1 = self._vector1
-        print(v1)
-        v2 = self._vector2   
-        print(v2)
+        v2 = self._vector2
         vecpr =[ v1[1]*v2[2]-v1[2]*v2[1], v1[2]*v2[0]-v1[0]*v2[2], v1[0]*v2[1]-v1[1]*v2[0] ]
-        print(vecpr)
         return vecpr
 
-    def getnormal0(self):
+    def toHess(self):
         vecpr = self.getnormal()
         vecprLength = (vecpr[0]**2+vecpr[1]**2+vecpr[2]**2)**0.5
         vecpr[0] /= vecprLength
@@ -146,14 +143,11 @@ class Ebene:
         if p0 < 0:
             for i in range(3):
                 vecpr[i] = vecpr[i]*(-1)
-        return vecpr
-
-    def toHess(self):
-        hesse_normal0 = self.getnormal0()
+                
         hesse_d = 0
         for i in range(3):
-            hesse_d += self._x0[i]*hesse_normal0[i]
-        return(EbeneHess(hesse_d,hesse_normal0))
+            hesse_d += self._x0[i]*vecpr[i]
+        return EbeneHess(hesse_d,vecpr)
 
     def ison(self,y):
         check = toHess
@@ -519,51 +513,28 @@ class EbeneHess:
         richtungsvektor2 = [line[0][2], line[1][2], line[2][2]]
         
         #c.f.: https://de.serlo.org/entity/view/1899
-        parametricPlane = Ebene(stützvektor, richtungsvektor1, richtungsvektor2)
-        return parametricPlane
+        return Ebene(stützvektor, richtungsvektor1, richtungsvektor2)
 
                 
 
-testEbene = Ebene([1, -6662, 3], [1000, -2.3, 3], [-1, 0, 3])
 testGerade = Gerade([-200, 662, 3], [-991, 2, 33])
-testEbeneHess = EbeneHess(1, [4, 4, 4])
-
-# print(testEbene)
 # print(testGerade)
-print(testEbeneHess)
 
-testEbeneHessToPara = testEbeneHess.toPara()
+# testEbeneHess = EbeneHess(1, [4, 4, 4])
+# print(testEbeneHess)
 
-print(testEbeneHessToPara)
+# testEbeneHessToPara = testEbeneHess.toPara()
+# print(testEbeneHessToPara)
 
 # testEbeneHessToParaToHess = testEbeneHessToPara.toHess()
-
 # print(testEbeneHessToParaToHess)
 
 
-# testGerade.isOn(testGerade.getX0())
-# testGerade.isOn(testGerade.getVector1())
-# testGerade.isOn([0,0,0])
-testEbeneHess = EbeneHess(2, [1, 1, 1])
-
+testEbene = Ebene([0, 0, 0], [0, 25, 0], [1, 0, 0])
 print(testEbene)
-print(testGerade)
+
+testEbeneHess = testEbene.toHess()
 print(testEbeneHess)
 
-testGerade2 = Gerade([1,0,0],[0,1,0])
-testGerade2.isOn([1,0,0])
-testGerade2.isOn([0,1,0])
-testGerade2.isOn([1,2,0]) 
-
-#testEbeneHessToPara = testEbeneHess.toPara()
-
-#print(testEbeneHessToPara)
-
-#testEbeneHessToParaToHess = testEbeneHessToPara.toHess()
-
-# testGerade2 = Gerade([1,0,0], [0,1,0])
-# testGerade2.isOn([1,0,0])
-# testGerade2.isOn(testGerade2.getVector1())
-# testGerade2.isOn([0,0,1])
-# testGerade2.isOn([1,2,0])
-#print(testEbeneHessToParaToHess)
+testEbeneHessToPara = testEbeneHess.toPara()
+print(testEbeneHessToPara)
