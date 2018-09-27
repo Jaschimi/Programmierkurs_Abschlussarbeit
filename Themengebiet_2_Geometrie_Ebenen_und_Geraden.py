@@ -262,7 +262,7 @@ class Gerade:
             raise TypeError("vec needs to be a list! vec was of type '{}'.".format(type(vec).__name__))
 
 
-    def isOnGerade(self,point):
+    def isOn(self,point):
         if(type(point==list)):
             if(len(point)==3):
                 aufpunkt = self.getX0()
@@ -475,65 +475,56 @@ class EbeneHess:
     def toPara(self):
         n0 = self.getNormal0()
         d = self.getD()
-        #es ist d = stützvektor*normalenvektor >=0
-            #suche einen von 0 verschiedenen eintrag im Normalenvektor, z.b. der 0te
-            #setze den ersten und zweiten eintrag des stützvektors auf 0
-            #setze den 0ten eintrag auf d/n0[0]
         
-        if(d==0):
-            stützvektor = [0, 0, 0]
-        else:
-            if(n0[0]!=0):
-                stützvektor = [d/n0[0], 0, 0]
+        line = [[], [], []]
+        if(n0[0]!=0):
+            line[0] = [d/-n0[0], n0[1]/-n0[0], n0[2]/-n0[0]]
+            line[1] = [0, 1, 0]
+            line[2] = [0, 0, 1]
+        elif(n0[1]!=0):
+            line[0] = [0, 1, 0]
+            line[1] = [d/-n0[1], n0[0]/-n0[1], n0[2]/-n0[1]]
+            line[2] = [0, 0, 1]
+        elif(n0[2]!=0):
+            line[0] = [0, 1, 0]
+            line[1] = [0, 0, 1]
+            line[2] = [d/-n0[2], n0[0]/-n0[2], n0[1]/-n0[2]]
 
-                if(n0[1]!=0):
-                    point1 = [0, d/n0[1], 0]
-                    
-                    if(n0[2]!=0):
-                        point2 = [0, 0, d/n0[2]]
-                    else:
-                        stützvektor = [0, 0, 0]
 
-                else:
-                    stützvektor = [0, 0, 0]
-                    
-            else:
-                stützvektor = [0, 0, 0]
-
-        richtungsvektor1 = [point1[0]-stützvektor[0], point1[1]-stützvektor[1], point1[2]-stützvektor[2]]
-        richtungsvektor2 = [point2[0]-stützvektor[0], point2[1]-stützvektor[1], point2[2]-stützvektor[2]]
+        stützvektor = [line[0][0], line[1][0], line[2][0]]
+        richtungsvektor1 = [line[0][1], line[1][1], line[2][1]]
+        richtungsvektor2 = [line[0][2], line[1][2], line[2][2]]
         
-        #c.f.: https://www.youtube.com/watch?v=DmxdxCJgFAI
+        #c.f.: https://de.serlo.org/entity/view/1899
         parametricPlane = Ebene(stützvektor, richtungsvektor1, richtungsvektor2)
         return parametricPlane
 
                 
 
 testEbene = Ebene([1, -6662, 3], [1000, -2.3, 3], [-1, 0, 3])
-# testGerade = Gerade([-200, 662, 3], [-991, 2, 33])
-testEbeneHess = EbeneHess(2, [1, 1, 1])
+testGerade = Gerade([-200, 662, 3], [-991, 2, 33])
+testEbeneHess = EbeneHess(1, [4, 4, 4])
 
-print(testEbene)
+# print(testEbene)
 # print(testGerade)
 print(testEbeneHess)
 
-<<<<<<< HEAD
 testEbeneHessToPara = testEbeneHess.toPara()
 
 print(testEbeneHessToPara)
 
-testEbeneHessToParaToHess = testEbeneHessToPara.toHess()
+# testEbeneHessToParaToHess = testEbeneHessToPara.toHess()
 
-print(testEbeneHessToParaToHess)
-=======
-testGerade.isOnGerade(testGerade.getX0())
-testGerade.isOnGerade(testGerade.getVector1())
-testGerade.isOnGerade([0,0,0])
+# print(testEbeneHessToParaToHess)
 
 
-testGerade2 = Gerade([1,0,0], [0,1,0])
-testGerade2.isOnGerade([1,0,0])
-testGerade2.isOnGerade(testGerade2.getVector1())
-testGerade2.isOnGerade([0,0,1])
-testGerade2.isOnGerade([1,2,0])
->>>>>>> 057ad2a4d144dcb177004506caa732dce59d8e6d
+# testGerade.isOn(testGerade.getX0())
+# testGerade.isOn(testGerade.getVector1())
+# testGerade.isOn([0,0,0])
+
+
+# testGerade2 = Gerade([1,0,0], [0,1,0])
+# testGerade2.isOn([1,0,0])
+# testGerade2.isOn(testGerade2.getVector1())
+# testGerade2.isOn([0,0,1])
+# testGerade2.isOn([1,2,0])
