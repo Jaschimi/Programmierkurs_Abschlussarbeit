@@ -276,10 +276,10 @@ class Gerade:
                 for i in range(3):
                     if(diff[i]!=0 and richtungsvektor[i]!=0):
                         r[i] =diff[i]/richtungsvektor[i]
-                        if(i=1):
+                        if(i==1):
                             if(r[0]!=r[1]):
                                 return print("nope, nicht auf gerade.")
-                        if(i=2):#da muss schon r[0]==r[1] gelten
+                        if(i==2):#da muss schon r[0]==r[1] gelten
                             if(r[1]!=r[2]):
                                 return print("nope, nicht auf gerade.")   
 
