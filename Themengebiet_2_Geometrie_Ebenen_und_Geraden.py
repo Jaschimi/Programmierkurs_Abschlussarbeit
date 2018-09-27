@@ -22,7 +22,10 @@
 class Ebene:
     def __init__(self, x0, vector1, vector2):
         if(type(x0)==list and type(vector1)==list and type(vector2)==list):
-
+            
+            if((vector1[0]==0 and vector1[1]==0 and vector1[2]==0) or (vector2[0]==0 and vector2[1]==0 and vector2[2]==0)):
+                raise ArithmeticError("vector1 and vector2 need to be different from [0, 0, 0]!")
+                
             if(len(x0)==3 and len(vector1)==3 and len(vector2)==3):
                 for i in x0:
                     if(not(type(i)==float or type(i)==int)):
@@ -50,7 +53,7 @@ class Ebene:
                         else:
                             mult[i] = mult[i-1]
 
-
+            
                 if(mult[0]==mult[1] and mult[1]==mult[2] and (type(mult[0])==int or type(mult[0])==float or type(mult[0])==str) and (type(mult[1])==int or type(mult[1])==float or type(mult[1])==str) and (type(mult[2])==int or type(mult[2])==float or type(mult[2])==str)):
                     raise ArithmeticError("vector1 and vector2 are linear dependent.")
 
@@ -216,7 +219,7 @@ class Ebene:
 
 
         #Calculating the amount of spaces needed in front of the three entries of x0
-        mostDigitsX0 = lengthOfX00 if (lengthOfX00>lengthOfX01) else (lengthOfX01 if (lengthOfX01>lengthOfX02) else lengthOfX02)
+        mostDigitsX0 = lengthOfX00 if (lengthOfX00>lengthOfX01 and lengthOfX00>lengthOfX02) else (lengthOfX01 if (lengthOfX01>lengthOfX02) else lengthOfX02)
         
         spacesX00 = mostDigitsX0 - lengthOfX00
         spacesX01 = mostDigitsX0 - lengthOfX01
@@ -227,7 +230,7 @@ class Ebene:
         spacesX02 = " " * spacesX02
 
         #Calculating the amount of spaces needed in front of the three entries of vector1
-        mostDigitsV1 =  lengthOfV10 if (lengthOfV10>lengthOfV11) else (lengthOfV11 if (lengthOfV11>lengthOfV12) else lengthOfV12)
+        mostDigitsV1 =  lengthOfV10 if (lengthOfV10>lengthOfV11 and lengthOfV10>lengthOfV12) else (lengthOfV11 if (lengthOfV11>lengthOfV12) else lengthOfV12)
         
         spacesV10 = mostDigitsV1 - lengthOfV10
         spacesV11 = mostDigitsV1 - lengthOfV11
@@ -237,8 +240,8 @@ class Ebene:
         spacesV11 = " " * spacesV11
         spacesV12 = " " * spacesV12
 
-        #Calculating the amount of spaces needed in front of the three entries of vector1
-        mostDigitsV2 =  lengthOfV20 if (lengthOfV20>lengthOfV21) else (lengthOfV21 if (lengthOfV21>lengthOfV22) else lengthOfV22)
+        #Calculating the amount of spaces needed in front of the three entries of vector2
+        mostDigitsV2 =  lengthOfV20 if (lengthOfV20>lengthOfV21 and lengthOfV20>lengthOfV22) else (lengthOfV21 if (lengthOfV21>lengthOfV22) else lengthOfV22)
         
         spacesV20 = mostDigitsV2 - lengthOfV20
         spacesV21 = mostDigitsV2 - lengthOfV21
@@ -335,10 +338,10 @@ class Gerade:
 
                     elif(diff[i]==0 and richtungsvektor[i]!=0):
                         #jetzt muss r=0 sein, damit man chance auf erfolg hat
-                        
-                        if(r[i]!=0):
-                            #return print("nope, nicht auf gerade.")
-                            return False
+                        pass
+                        # if(r[i]!=0):
+                        #     #return print("nope, nicht auf gerade.")
+                        #     return False
                         
                     else:
                     #also if(diff[i]==0 and richtungsvektor[i]==0):
@@ -350,7 +353,7 @@ class Gerade:
                         continue
                     else:
                         answers.append(r[k])
-                if(len(answers)<2):
+                if(len(set(answers))<2):
                     return True
                     #return print("jo, liegt auf der gerade")
                 else:
@@ -358,9 +361,9 @@ class Gerade:
                     #return print("nope, nicht auf gerade.")
 
             else:
-                raise IndexError("your input needs to be of length 3! it was of length '{}'.".format(len(point)))
+                raise IndexError("Your input needs to be of length 3! It was of length '{}'.".format(len(point)))
         else:
-            raise TypeError("your input needs to be a list! it was of type '{}'.".format(type(point).__name__)) 
+            raise TypeError("Your input needs to be a list or tuple! It was of type '{}'.".format(type(point).__name__)) 
 
     def getX0(self):
         return self._x0
@@ -453,7 +456,7 @@ class EbeneHess:
             if(d>=0):
                 self._d = d
             else:
-                raise ArithmeticError("d needs to be greater than/equal to 0.")
+                raise ArithmeticError("d needs to be greater than or equal 0.")
         else:
             raise TypeError("d needs to be a real number! d was of type '{}'.".format(type(d).__name__))
             
@@ -577,23 +580,23 @@ print(testGerade)
 # print(testEbeneHessToParaToHess)
 
 
-testEbene = Ebene([0, 0, 0], [0, 0, 0], [0, 0, 0])
-print(testEbene)
+testEbene = Ebene([0, 0, 0], [1, 0, 0], [0, 0, 0])
+print(testEbene.isOn([0, 0, "hdf"]))
 
-print(testEbene.isOn([1, 0, 0]))
-print(testEbene.isOn([0, -1, 0]))
-print(testEbene.isOn([0, 0, 1]))
-print(testEbene.isOn([1, 1, 0]))
-print(testEbene.isOn([0, 1, 1]))
-print(testEbene.isOn([1, 0, 1]))
-print(testEbene.isOn([1, 1, 1]))
+# print(testEbene.isOn([1, 0, 0]))
+# print(testEbene.isOn([0, -1, 0]))
+# print(testEbene.isOn([0, 0, 1]))
+# print(testEbene.isOn([1, 1, 0]))
+# print(testEbene.isOn([0, 1, 1]))
+# print(testEbene.isOn([1, 0, 1]))
+# print(testEbene.isOn([1, 1, 1]))
 
-testGerade2 = Gerade([1,0,0],[0,1,0])
-print(testGerade2.isOn(testGerade2.getX0()))
-print(testGerade2.isOn([0,1,0]))
-print(testGerade2.isOn([0,0,0]))
-print(testGerade2.isOn([1,2,0]))
-print(testGerade2.isOn([2,3,0]))
+# testGerade2 = Gerade([1,0,0],[0,1,0])
+# print(testGerade2.isOn(testGerade2.getX0()))
+# print(testGerade2.isOn([0,1,0]))
+# print(testGerade2.isOn([0,0,0]))
+# print(testGerade2.isOn([1,2,0]))
+# print(testGerade2.isOn([2,3,0]))
 # testEbeneHess = testEbene.toHess()
 # print(testEbeneHess)
 
