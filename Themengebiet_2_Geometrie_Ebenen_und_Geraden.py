@@ -155,6 +155,18 @@ class Ebene:
             hesse_d += self._x0[i]*hesse_normal0[i]
         return(EbeneHess(hesse_d,hesse_normal0))
 
+    def ison(self,y):
+        check = toHess
+        d = check.getD
+        n0 = check.getNormal0
+        for i in range(3):
+            k = 0
+            k += n0[i]*y[i]
+        if k-d = 0 :
+            print("Der Punkt {} liegt in der Ebene".format(y))
+        else:
+            print("Der Punkt {} liegt nicht in der Ebene".format(y))
+
     def __str__(self):
         print()
         #Easy access for the length of the entries in x0
