@@ -273,8 +273,15 @@ class Gerade:
     def isOn(self,point):
         if(type(point)==list or type(point)==tuple):
             if(len(point)==3):
-                aufpunkt = self.getX0()
+                
                 print("der zu untersuchende punkt ist ",point)
+                for i in range(3):
+                    if( not(type(point[i])==float or type(point[i])==int) ):
+                        raise TypeError("The entries of point need to be real numbers! point[0] was of type '" +
+                        "{}', point[1] was of type '{}', ".format(type(point[0]).__name__, type(point[1]).__name__) +
+                        "and point[2] was of type '{}'.".format(type(point[2]).__name__))
+                
+                aufpunkt = self.getX0()
                 print("der stützpunkt ist ",aufpunkt)
                 richtungsvektor = self.getVector1()
                 print("der richtungsvektor ist ", richtungsvektor)
