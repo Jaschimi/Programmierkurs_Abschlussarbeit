@@ -149,17 +149,19 @@ class Ebene:
             hesse_d += self._x0[i]*vecpr[i]
         return EbeneHess(hesse_d,vecpr)
 
-    def ison(self,y):
-        check = toHess
-        d = check.getD
-        n0 = check.getNormal0
+    def isOn(self,y):
+        check = self.toHess()
+        d = check.getD()
+        n0 = check.getNormal0()
+        k = 0
         for i in range(3):
-            k = 0
             k += n0[i]*y[i]
-        if k-d = 0 :
-            print("Der Punkt {} liegt in der Ebene".format(y))
+        if k-d == 0 :
+            # print("Der Punkt {} liegt in der Ebene".format(y))
+            return True
         else:
-            print("Der Punkt {} liegt nicht in der Ebene".format(y))
+            # print("Der Punkt {} liegt nicht in der Ebene".format(y))
+            return False
 
     def __str__(self):
         print()
@@ -533,8 +535,17 @@ testGerade = Gerade([-200, 662, 3], [-991, 2, 33])
 testEbene = Ebene([0, 0, 0], [0, 25, 0], [1, 0, 0])
 print(testEbene)
 
-testEbeneHess = testEbene.toHess()
-print(testEbeneHess)
+print(testEbene.isOn([1, 0, 0]))
+print(testEbene.isOn([0, -1, 0]))
+print(testEbene.isOn([0, 0, 1]))
+print(testEbene.isOn([1, 1, 0]))
+print(testEbene.isOn([0, 1, 1]))
+print(testEbene.isOn([1, 0, 1]))
+print(testEbene.isOn([1, 1, 1]))
 
-testEbeneHessToPara = testEbeneHess.toPara()
-print(testEbeneHessToPara)
+
+# testEbeneHess = testEbene.toHess()
+# print(testEbeneHess)
+
+# testEbeneHessToPara = testEbeneHess.toPara()
+# print(testEbeneHessToPara)
