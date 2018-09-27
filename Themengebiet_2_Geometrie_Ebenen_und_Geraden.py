@@ -289,7 +289,7 @@ class Gerade:
         if(type(point)==list or type(point)==tuple):
             if(len(point)==3):
                 
-                print("der zu untersuchende punkt ist ",point)
+                #print("der zu untersuchende punkt ist ",point)
                 for i in range(3):
                     if( not(type(point[i])==float or type(point[i])==int) ):
                         raise TypeError("The entries of point need to be real numbers! point[0] was of type '" +
@@ -297,9 +297,9 @@ class Gerade:
                         "and point[2] was of type '{}'.".format(type(point[2]).__name__))
                 
                 aufpunkt = self.getX0()
-                print("der stützpunkt ist ",aufpunkt)
+                #print("der stützpunkt ist ",aufpunkt)
                 richtungsvektor = self.getVector1()
-                print("der richtungsvektor ist ", richtungsvektor)
+                #print("der richtungsvektor ist ", richtungsvektor)
                 diff = [ point[0]-aufpunkt[0] , point[1]-aufpunkt[1] , point[2]-aufpunkt[2] ]
                 r = [0,0,0]  #lösung der geradengleichung
                 
@@ -567,7 +567,12 @@ print(testEbene.isOn([0, 1, 1]))
 print(testEbene.isOn([1, 0, 1]))
 print(testEbene.isOn([1, 1, 1]))
 
-
+testGerade2 = Gerade([1,0,0],[0,1,0])
+print(testGerade2.isOn(testGerade2.getX0()))
+print(testGerade2.isOn([0,1,0]))
+print(testGerade2.isOn([0,0,0]))
+print(testGerade2.isOn([1,2,0]))
+print(testGerade2.isOn([2,3,0]))
 # testEbeneHess = testEbene.toHess()
 # print(testEbeneHess)
 
