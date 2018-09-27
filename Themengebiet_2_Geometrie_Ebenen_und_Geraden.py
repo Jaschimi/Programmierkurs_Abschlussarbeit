@@ -263,7 +263,7 @@ class Gerade:
 
 
     def isOn(self,point):
-        if(type(point==list)):
+        if(type(point)==list or type(point)==tuple):
             if(len(point)==3):
                 aufpunkt = self.getX0()
                 print("der zu untersuchende punkt ist ",point)
