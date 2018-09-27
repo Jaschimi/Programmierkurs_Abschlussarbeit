@@ -150,7 +150,9 @@ class Ebene:
 
     def toHess(self):
         hesse_normal0 = self.getnormal0()
-        hesse_d = self._x0*hesse_normal0
+        hesse_d = 0
+        for i in range(3):
+            hesse_d += self._x0[i]*hesse_normal0[i]
         return(EbeneHess(hesse_d,hesse_normal0))
 
     def __str__(self):
