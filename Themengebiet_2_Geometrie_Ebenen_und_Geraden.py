@@ -262,7 +262,7 @@ class Gerade:
             raise TypeError("vec needs to be a list! vec was of type '{}'.".format(type(vec).__name__))
 
 
-    def isOnGerade(self,point):
+    def isOn(self,point):
         if(type(point==list)):
             if(len(point)==3):
                 aufpunkt = self.getX0()
@@ -271,11 +271,17 @@ class Gerade:
                 richtungsvektor = self.getVector1()
                 print("der richtungsvektor ist ", richtungsvektor)
                 diff = [ point[0]-aufpunkt[0] , point[1]-aufpunkt[1] , point[2]-aufpunkt[2] ]
-                r = 0  #lösung der geradengleichung
+                r = [0,0,0]  #lösung der geradengleichung
                 
                 for i in range(3):
                     if(diff[i]!=0 and richtungsvektor[i]!=0):
-                        r =diff[i]/richtungsvektor[i]
+                        r[i] =diff[i]/richtungsvektor[i]
+                        if(i=1):
+                            if(r[0]!=r[1]):
+                                return print("nope, nicht auf gerade.")
+                        if(i=2):#da muss schon r[0]==r[1] gelten
+                            if(r[1]!=r[2]):
+                                return print("nope, nicht auf gerade.")   
 
                     if(diff[i]!=0 and richtungsvektor[i]==0):
                         return print("nope, nicht auf gerade.")
