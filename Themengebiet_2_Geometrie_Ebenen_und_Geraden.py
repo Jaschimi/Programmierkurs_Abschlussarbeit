@@ -29,7 +29,7 @@ class Ebene:
             if(len(x0)==3 and len(vector1)==3 and len(vector2)==3):
                 for i in x0:
                     if(not(type(i)==float or type(i)==int)):
-                        raise TypeError("The entries of x0 need to be real numbers! x0[0] was of type '" +
+                        raise TypeError("The elements of x0 need to be real numbers! x0[0] was of type '" +
                         "{}', x0[1] was of type '{}', ".format(type(x0[0]).__name__, type(x0[1]).__name__) +
                         "and x0[2] was of type '{}'.".format(type(x0[2]).__name__))
                 self._x0 = x0
@@ -59,14 +59,14 @@ class Ebene:
 
                 for i in vector1:
                     if(not(type(i)==float or type(i)==int)):
-                        raise TypeError("The entries of vector1 need to be real numbers! vector1[0] was of type '" +
+                        raise TypeError("The elements of vector1 need to be real numbers! vector1[0] was of type '" +
                         "{}', vector1[1] was of type '{}', ".format(type(vector1[0]).__name__, type(vector1[1]).__name__) +
                         "and vector1[2] was of type '{}'.".format(type(vector1[2]).__name__))
                 self._vector1 = vector1
 
                 for i in vector2:
                     if(not(type(i)==float or type(i)==int)):
-                        raise TypeError("The entries of vector2 need to be real numbers! vector2[0] was of type '" +
+                        raise TypeError("The elements of vector2 need to be real numbers! vector2[0] was of type '" +
                         "{}', vector2[1] was of type '{}', ".format(type(vector2[0]).__name__, type(vector2[1]).__name__) +
                         "and vector2[2] was of type '{}'.".format(type(vector2[2]).__name__))
                 self._vector2 = vector2
@@ -85,7 +85,7 @@ class Ebene:
             if(len(vec)==3):
                 for i in range(len(vec)):
                     if(not(type(vec[i])==float or type(vec[i])==int)):
-                        raise TypeError("The entries of vec need to be real numbers! vec[0] was of type '" +
+                        raise TypeError("The elements of vec need to be real numbers! vec[0] was of type '" +
                         "{}', vec[1] was of type '{}', ".format(type(vec[0]).__name__, type(vec[1]).__name__) +
                         "and vec[2] was of type '{}'.".format(type(vec[2]).__name__))
                     else:
@@ -110,7 +110,7 @@ class Ebene:
             if(len(x0)==3):
                 for i in x0:
                     if(not(type(i)==float or type(i)==int)):
-                        raise TypeError("The entries of x0 need to be real numbers! x0[0] was of type '" +
+                        raise TypeError("The elements of x0 need to be real numbers! x0[0] was of type '" +
                         "{}', x0[1] was of type '{}', ".format(type(x0[0]).__name__, type(x0[1]).__name__) +
                         "and x0[2] was of type '{}'.".format(type(x0[2]).__name__))
                 self._x0 = x0
@@ -125,7 +125,7 @@ class Ebene:
             if(len(vector1)==3):
                 for i in vector1:
                     if(not(type(i)==float or type(i)==int)):
-                        raise TypeError("The entries of vector1 need to be real numbers! vector1[0] was of type '" +
+                        raise TypeError("The elements of vector1 need to be real numbers! vector1[0] was of type '" +
                         "{}', vector1[1] was of type '{}', ".format(type(vector1[0]).__name__, type(vector1[1]).__name__) +
                         "and vector1[2] was of type '{}'.".format(type(vector1[2]).__name__))
                 self._vector1 = vector1
@@ -140,7 +140,7 @@ class Ebene:
             if(len(vector2)==3):
                 for i in vector2:
                     if(not(type(i)==float or type(i)==int)):
-                        raise TypeError("The entries of vector2 need to be real numbers! vector2[0] was of type '" +
+                        raise TypeError("The elements of vector2 need to be real numbers! vector2[0] was of type '" +
                         "{}', vector2[1] was of type '{}', ".format(type(vector2[0]).__name__, type(vector2[1]).__name__) +
                         "and vector2[2] was of type '{}'.".format(type(vector2[2]).__name__))
                 self._vector2 = vector2
@@ -178,7 +178,7 @@ class Ebene:
             if(len(y)==3):
                 for i in range(len(y)):
                     if(not(type(y[i])==float or type(y[i])==int)):
-                        raise TypeError("The entries of y need to be real numbers! y[0] was of type '" +
+                        raise TypeError("The elements of y need to be real numbers! y[0] was of type '" +
                             "{}', y[1] was of type '{}', ".format(type(y[0]).__name__, type(y[1]).__name__) +
                             "and y[2] was of type '{}'.".format(type(y[2]).__name__))
                     
@@ -202,23 +202,23 @@ class Ebene:
 
     def __str__(self):
         print()
-        #Easy access for the length of the entries in x0
+        #Easy access for the length of the elements in x0
         lengthOfX00 = len(str(self._x0[0]))
         lengthOfX01 = len(str(self._x0[1]))
         lengthOfX02 = len(str(self._x0[2]))
         
-        #Easy access for the length of the entries in vector1
+        #Easy access for the length of the elements in vector1
         lengthOfV10 = len(str(self._vector1[0])) - (1 if self._vector1[0]<0 else 0)
         lengthOfV11 = len(str(self._vector1[1])) - (1 if self._vector1[1]<0 else 0)
         lengthOfV12 = len(str(self._vector1[2])) - (1 if self._vector1[2]<0 else 0)
 
-        #Easy access for the length of the entries in vector2
+        #Easy access for the length of the elements in vector2
         lengthOfV20 = len(str(self._vector2[0])) - (1 if self._vector2[0]<0 else 0)
         lengthOfV21 = len(str(self._vector2[1])) - (1 if self._vector2[1]<0 else 0)
         lengthOfV22 = len(str(self._vector2[2])) - (1 if self._vector2[2]<0 else 0)
 
 
-        #Calculating the amount of spaces needed in front of the three entries of x0
+        #Calculating the amount of spaces needed in front of the three elements of x0
         mostDigitsX0 = lengthOfX00 if (lengthOfX00>lengthOfX01 and lengthOfX00>lengthOfX02) else (lengthOfX01 if (lengthOfX01>lengthOfX02) else lengthOfX02)
         
         spacesX00 = mostDigitsX0 - lengthOfX00
@@ -229,7 +229,7 @@ class Ebene:
         spacesX01 = " " * spacesX01
         spacesX02 = " " * spacesX02
 
-        #Calculating the amount of spaces needed in front of the three entries of vector1
+        #Calculating the amount of spaces needed in front of the three elements of vector1
         mostDigitsV1 =  lengthOfV10 if (lengthOfV10>lengthOfV11 and lengthOfV10>lengthOfV12) else (lengthOfV11 if (lengthOfV11>lengthOfV12) else lengthOfV12)
         
         spacesV10 = mostDigitsV1 - lengthOfV10
@@ -240,7 +240,7 @@ class Ebene:
         spacesV11 = " " * spacesV11
         spacesV12 = " " * spacesV12
 
-        #Calculating the amount of spaces needed in front of the three entries of vector2
+        #Calculating the amount of spaces needed in front of the three elements of vector2
         mostDigitsV2 =  lengthOfV20 if (lengthOfV20>lengthOfV21 and lengthOfV20>lengthOfV22) else (lengthOfV21 if (lengthOfV21>lengthOfV22) else lengthOfV22)
         
         spacesV20 = mostDigitsV2 - lengthOfV20
@@ -273,14 +273,14 @@ class Gerade:
             if(len(x0)==3 and len(vector1)==3):
                 for i in x0:
                     if(not(type(i)==float or type(i)==int)):
-                        raise TypeError("The entries of x0 need to be real numbers! x0[0] was of type '" +
+                        raise TypeError("The elements of x0 need to be real numbers! x0[0] was of type '" +
                         "{}', x0[1] was of type '{}', ".format(type(x0[0]).__name__, type(x0[1]).__name__) +
                         "and x0[2] was of type '{}'.".format(type(x0[2]).__name__))
                 self._x0 = x0
 
                 for i in vector1:
                     if(not(type(i)==float or type(i)==int)):
-                        raise TypeError("The entries of vector1 need to be real numbers! vector1[0] was of type '" +
+                        raise TypeError("The elements of vector1 need to be real numbers! vector1[0] was of type '" +
                         "{}', vector1[1] was of type '{}', ".format(type(vector1[0]).__name__, type(vector1[1]).__name__) +
                         "and vector1[2] was of type '{}'.".format(type(vector1[2]).__name__))
                 self._vector1 = vector1
@@ -297,7 +297,7 @@ class Gerade:
             if(len(vec)==3):
                 for i in range(len(vec)):
                     if(not(type(vec[i])==float or type(vec[i])==int)):
-                        raise TypeError("The entries of vec need to be real numbers! vec[0] was of type '" +
+                        raise TypeError("The elements of vec need to be real numbers! vec[0] was of type '" +
                         "{}', vec[1] was of type '{}', ".format(type(vec[0]).__name__, type(vec[1]).__name__) +
                         "and vec[2] was of type '{}'.".format(type(vec[2]).__name__))
                     else:
@@ -316,7 +316,7 @@ class Gerade:
                 #print("der zu untersuchende punkt ist ",point)
                 for i in range(3):
                     if( not(type(point[i])==float or type(point[i])==int) ):
-                        raise TypeError("The entries of point need to be real numbers! point[0] was of type '" +
+                        raise TypeError("The elements of point need to be real numbers! point[0] was of type '" +
                         "{}', point[1] was of type '{}', ".format(type(point[0]).__name__, type(point[1]).__name__) +
                         "and point[2] was of type '{}'.".format(type(point[2]).__name__))
                 
@@ -376,7 +376,7 @@ class Gerade:
             if(len(x0)==3):
                 for i in x0:
                     if(not(type(i)==float or type(i)==int)):
-                        raise TypeError("The entries of x0 need to be real numbers! x0[0] was of type '" +
+                        raise TypeError("The elements of x0 need to be real numbers! x0[0] was of type '" +
                         "{}', x0[1] was of type '{}', ".format(type(x0[0]).__name__, type(x0[1]).__name__) +
                         "and x0[2] was of type '{}'.".format(type(x0[2]).__name__))
                 self._x0 = x0
@@ -391,7 +391,7 @@ class Gerade:
             if(len(vector1)==3):
                 for i in vector1:
                     if(not(type(i)==float or type(i)==int)):
-                        raise TypeError("The entries of vector1 need to be real numbers! vector1[0] was of type '" +
+                        raise TypeError("The elements of vector1 need to be real numbers! vector1[0] was of type '" +
                         "{}', vector1[1] was of type '{}', ".format(type(vector1[0]).__name__, type(vector1[1]).__name__) +
                         "and vector1[2] was of type '{}'.".format(type(vector1[2]).__name__))
                 self._vector1 = vector1
@@ -403,18 +403,18 @@ class Gerade:
         
     def __str__(self):
         print()
-        #Easy access for the length of the entries in x0
+        #Easy access for the length of the elements in x0
         lengthOfX00 = len(str(self._x0[0]))
         lengthOfX01 = len(str(self._x0[1]))
         lengthOfX02 = len(str(self._x0[2]))
 
-        #Easy access for the length of the entries in vector1
+        #Easy access for the length of the elements in vector1
         lengthOfV10 = len(str(self._vector1[0])) - (1 if self._vector1[0]<0 else 0)
         lengthOfV11 = len(str(self._vector1[1])) - (1 if self._vector1[1]<0 else 0)
         lengthOfV12 = len(str(self._vector1[2])) - (1 if self._vector1[2]<0 else 0)
 
 
-        #Calculating the amount of spaces needed in front of the three entries of x0
+        #Calculating the amount of spaces needed in front of the three elements of x0
         mostDigitsX0 = lengthOfX00 if (lengthOfX00>lengthOfX01) else (lengthOfX01 if (lengthOfX01>lengthOfX02) else lengthOfX02)
         
         spacesX00 = mostDigitsX0 - lengthOfX00
@@ -426,7 +426,7 @@ class Gerade:
         spacesX02 = " " * spacesX02
 
 
-        #Calculating the amount of spaces needed in front of the three entries of vector1
+        #Calculating the amount of spaces needed in front of the three elements of vector1
         mostDigitsV1 =  lengthOfV10 if (lengthOfV10>lengthOfV11) else (lengthOfV11 if (lengthOfV11>lengthOfV12) else lengthOfV12)
         
         spacesV10 = mostDigitsV1 - lengthOfV10
@@ -437,13 +437,13 @@ class Gerade:
         spacesV11 = " " * spacesV11
         spacesV12 = " " * spacesV12
 
-        return ("    {}{} {} {}{} * r\n".format(spacesX00, self._x0[0], "+" if (self._vector1[0]>=0)
+        return ("   x1 = {}{} {} {}{} * r\n".format(spacesX00, self._x0[0], "+" if (self._vector1[0]>=0)
                 else "-", spacesV10, self._vector1[0] if self._vector1[0]>=0 else -self._vector1[0]) + 
 
-                "G = {}{} {} {}{} * r\n".format(spacesX01, self._x0[1], "+" if (self._vector1[1]>=0)
+                "G: x2 = {}{} {} {}{} * r\n".format(spacesX01, self._x0[1], "+" if (self._vector1[1]>=0)
                 else "-", spacesV11, self._vector1[1] if self._vector1[1]>=0 else -self._vector1[1]) +
                 
-                "    {}{} {} {}{} * r\n".format(spacesX02, self._x0[2], "+" if (self._vector1[2]>=0)
+                "   x3 = {}{} {} {}{} * r\n".format(spacesX02, self._x0[2], "+" if (self._vector1[2]>=0)
                 else "-", spacesV12, self._vector1[2] if self._vector1[2]>=0 else -self._vector1[2]))
 
     def __repr__(self):
@@ -464,13 +464,40 @@ class EbeneHess:
             if(len(normal0)==3):
                 for i in normal0:
                     if(not(type(i)==float or type(i)==int)):
-                        raise TypeError("The entries of normal0 need to be real numbers! normal0[0] was of type '" +
+                        raise TypeError("The elements of normal0 need to be real numbers! normal0[0] was of type '" +
                         "{}', normal0[1] was of type '{}', ".format(type(normal0[0]).__name__, type(normal0[1]).__name__) +
                         "and normal0[2] was of type '{}'.".format(type(normal0[2]).__name__))
                 normal0Length = (normal0[0]**2+normal0[1]**2+normal0[2]**2)**0.5
                 normal0[0] /= normal0Length
                 normal0[1] /= normal0Length
                 normal0[2] /= normal0Length
+
+                #Calculating the stützvektor to check if normal0 is orientated correctly. Method copied from
+                #the toHess() method from below.
+                line = [[], [], []]
+                if(normal0[0]!=0):
+                    line[0] = [d/-normal0[0]]
+                    line[1] = [0]
+                    line[2] = [0]
+                elif(normal0[1]!=0):
+                    line[0] = [0]
+                    line[1] = [d/-normal0[1]]
+                    line[2] = [0]
+                elif(normal0[2]!=0):
+                    line[0] = [0]
+                    line[1] = [0]
+                    line[2] = [d/-normal0[2]]
+                stützvektor = [line[0][0], line[1][0], line[2][0]]
+
+                #This should calculate d. If it is different from d (i.e, if "hesse_d == -d" is True),
+                #normal0 needs to be "turned around" (i.e., multiplied by -1).
+                hesse_d = 0
+                for i in range(3):
+                    hesse_d += stützvektor[i]*normal0[i]
+                if hesse_d < 0:
+                    for i in range(3):
+                        normal0[i] *= -1
+
                 self._normal0 = normal0
 
             else:
@@ -498,7 +525,7 @@ class EbeneHess:
             if(len(normal0)==3):
                 for i in normal0:
                     if(not(type(i)==float or type(i)==int)):
-                        raise TypeError("The entries of normal0 need to be real numbers! normal0[0] was of type '" +
+                        raise TypeError("The elements of normal0 need to be real numbers! normal0[0] was of type '" +
                         "{}', normal0[1] was of type '{}', ".format(type(normal0[0]).__name__, type(normal0[1]).__name__) +
                         "and normal0[2] was of type '{}'.".format(type(normal0[2]).__name__))
                 normal0Length = (normal0[0]**2+normal0[1]**2+normal0[2]**2)**0.5
@@ -514,12 +541,12 @@ class EbeneHess:
             
     def __str__(self):
         print()
-        #Easy access for the length of the entries in vector1
+        #Easy access for the length of the elements in vector1
         lengthOfN00 = len(str(self._normal0[0]))
         lengthOfN01 = len(str(self._normal0[1]))
         lengthOfN02 = len(str(self._normal0[2]))
 
-        #Calculating the amount of spaces needed in front of the three entries of vector1
+        #Calculating the amount of spaces needed in front of the three elements of vector1
         mostDigitsN0 =  lengthOfN00 if (lengthOfN00>lengthOfN01) else (lengthOfN01 if (lengthOfN01>lengthOfN02) else lengthOfN02)
         
         spacesN00 = mostDigitsN0 - lengthOfN00
@@ -570,19 +597,20 @@ class EbeneHess:
 testGerade = Gerade([-200, 662, 3], [-991, 2, 33])
 print(testGerade)
 
-# testEbeneHess = EbeneHess(1, [4, 4, 4])
-# print(testEbeneHess)
+testEbeneHess = EbeneHess(1, [1, 0, 0])
+print(testEbeneHess)
 
-# testEbeneHessToPara = testEbeneHess.toPara()
-# print(testEbeneHessToPara)
+testEbeneHessToPara = testEbeneHess.toPara()
+print(testEbeneHessToPara)
 
-# testEbeneHessToParaToHess = testEbeneHessToPara.toHess()
-# print(testEbeneHessToParaToHess)
+testEbeneHessToParaToHess = testEbeneHessToPara.toHess()
+print(testEbeneHessToParaToHess)
 
 
-testEbene = Ebene([0, 0, 0], [1, 0, 0], [2, 1, 0])
-print(testEbene.isOn([0, 0, "hdl"]))
+# testEbene = Ebene([0, 0, 0], [1, 0, 0], [2, 1, 0])
+# print(testEbene)
 
+# print(testEbene.isOn([0, 0, 0]))
 # print(testEbene.isOn([1, 0, 0]))
 # print(testEbene.isOn([0, -1, 0]))
 # print(testEbene.isOn([0, 0, 1]))
